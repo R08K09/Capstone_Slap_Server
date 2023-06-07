@@ -95,4 +95,24 @@ public class User {
     public void setSlaps(List<Slap> slaps) {
         this.slaps = slaps;
     }
+
+
+//    Methods
+
+    public void addFriend(User user){
+        this.friends.add(user);
+    }
+
+    public void removeFriend(User user){
+        this.friends.remove(user);
+    }
+
+    public void addSlap(Slap slap){
+        this.slaps.add(slap);
+    }
+
+    public void removeSlap(Slap slap){
+        this.slaps.remove(slap);
+    }
+
 }
