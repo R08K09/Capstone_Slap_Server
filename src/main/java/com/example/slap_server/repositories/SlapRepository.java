@@ -1,4 +1,7 @@
 package com.example.slap_server.repositories;
 
-public interface SlapRepository {
+import com.example.slap_server.models.Slap;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface SlapRepository extends JpaRepository <Slap, Long> {
 }
