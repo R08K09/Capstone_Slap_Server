@@ -7,16 +7,15 @@ public class Friendship {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column
     private long id;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "first_user_id", referencedColumnName = "id")
-    @Column
     private User first_user;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "second_user_id", referencedColumnName = "id")
-    @Column
     private User second_user;
 
 

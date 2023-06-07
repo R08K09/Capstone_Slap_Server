@@ -1,5 +1,6 @@
 package com.example.slap_server.models;
 
+import com.example.slap_server.repositories.FriendshipRepository;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
@@ -23,7 +24,7 @@ public class User {
     private String email;
 
     @Column(name = "friends")
-    private List<User> friends;
+    private List<Friendship> friendships;
 
     @JsonIgnoreProperties({"users"})
     @OneToMany(mappedBy = "user")
@@ -36,7 +37,7 @@ public class User {
         this.username = username;
         this.bio = bio;
         this.email = email;
-        this.friends = new ArrayList<>();
+        this.friendships = new ArrayList<>();
         this.slaps = new ArrayList<>();
     }
 
@@ -80,12 +81,12 @@ public class User {
         this.email = email;
     }
 
-    public List<User> getFriends() {
-        return friends;
+    public List<Friendship> getFriendships() {
+        return friendships;
     }
 
-    public void setFriends(List<User> friends) {
-        this.friends = friends;
+    public void setFriendships(List<Friendship> friendship) {
+        this.friendships = friendship;
     }
 
     public List<Slap> getSlaps() {
@@ -99,12 +100,12 @@ public class User {
 
 //    Methods
 
-    public void addFriend(User user){
-        this.friends.add(user);
+    public void addFriendship(Friendship friendship){
+        this.friendships.add(friendship);
     }
 
-    public void removeFriend(User user){
-        this.friends.remove(user);
+    public void removeFriendship(Friendship friendship){
+        this.friendships.remove(friendship);
     }
 
     public void addSlap(Slap slap){
