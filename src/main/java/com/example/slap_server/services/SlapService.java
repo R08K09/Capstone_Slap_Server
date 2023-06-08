@@ -17,17 +17,13 @@ public class SlapService {
         return slapRepository.findAll();
     }
 
-//    public Slap findSlapById(Long id){
-//        return slapRepository.findById(id).get();
-//    }
-//
-//    public List<Slap> findSlapByUser(Long user_id){
-//        return slapRepository.findSlapByUserId(user_id);
-//    }
+    public Slap findSlapById(Long id){
+        return slapRepository.findById(id).get();
+    }
 
-//    public List<Slap> findSlapByTimeDesc(Long id){
-//        return slapRepository.findSlapByDateTime(id);
-//    }
+    public List<Slap> findSlapByUser(Long user_id){
+        return slapRepository.findSlapByUserId(user_id);
+    }
 
     public void deleteSlapById(Long id){
         slapRepository.deleteById(id);
