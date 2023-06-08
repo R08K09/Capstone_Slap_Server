@@ -35,10 +35,10 @@ public class DataLoader implements ApplicationRunner {
         User user3 = new User("Rada", "hi", "rada@email");
         userRepository.save(user3);
 
-        user1.addFriendship(user2);
+        user1.addUserToFollow(user2);
         userRepository.save(user1);
 
-        user3.addFriendship(user1);
+        user3.addUserToFollow(user1);
         userRepository.save(user3);
 
     }

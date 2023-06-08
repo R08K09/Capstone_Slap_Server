@@ -8,7 +8,7 @@ import java.util.List;
 @Repository
 public interface SlapRepository extends JpaRepository <Slap, Long> {
 
-    List<Slap> findSlapByUser(Long user_id);
-
-    List<Slap> findSlapByDateTimeDesc(Long id);
+//    List<Slap> findSlapByUserId(Long user_id);
+//
+//    List<Slap> findSlapByDateTime(Long id);
 }

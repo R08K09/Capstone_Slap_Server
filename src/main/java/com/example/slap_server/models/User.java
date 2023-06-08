@@ -1,6 +1,5 @@
 package com.example.slap_server.models;
 
-import com.example.slap_server.repositories.FriendshipRepository;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
@@ -23,13 +22,18 @@ public class User {
     @Column(name = "email")
     private String email;
 
+    @JsonIgnoreProperties({"followers"})
     @ManyToMany
     @JoinTable(
-            name = "friendships",
-            joinColumns={@JoinColumn(name = "user1_id", referencedColumnName = "id")},
-            inverseJoinColumns={@JoinColumn(name = "user2_id", referencedColumnName = "id")}
+            name = "followings",
+            joinColumns={@JoinColumn(name = "user_id", referencedColumnName = "id")},
+            inverseJoinColumns={@JoinColumn(name = "following_id", referencedColumnName = "id")}
     )
-    private List<User> friendships;
+    private List<User> following;
+
+    @JsonIgnoreProperties({"following"})
+    @ManyToMany(mappedBy = "following")
+    private List<User> followers;
 
 
     @JsonIgnoreProperties({"users"})
@@ -43,7 +47,7 @@ public class User {
         this.username = username;
         this.bio = bio;
         this.email = email;
-        this.friendships = new ArrayList<>();
+        this.following = new ArrayList<>();
         this.slaps = new ArrayList<>();
     }
 
@@ -87,12 +91,20 @@ public class User {
         this.email = email;
     }
 
-    public List<User> getFriendships() {
-        return friendships;
+    public List<User> getFollowing() {
+        return following;
     }
 
-    public void setFriendships(List<User> friendship) {
-        this.friendships = friendship;
+    public void setFollowing(List<User> following) {
+        this.following = following;
+    }
+
+    public List<User> getFollowers() {
+        return followers;
+    }
+
+    public void setFollowers(List<User> followers) {
+        this.followers = followers;
     }
 
     public List<Slap> getSlaps() {
@@ -106,12 +118,12 @@ public class User {
 
 //    Methods
 
-    public void addFriendship(User friendship){
-        this.friendships.add(friendship);
+    public void addUserToFollow(User user){
+        this.following.add(user);
     }
 
-    public void removeFriendship(User friendship){
-        this.friendships.remove(friendship);
+    public void unfollow(User user){
+        this.following.remove(user);
     }
 
     public void addSlap(Slap slap){
