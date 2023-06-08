@@ -23,8 +23,9 @@ public class User {
     @Column(name = "email")
     private String email;
 
-    @Column(name = "friends")
-    private List<Friendship> friendships;
+    @ManyToMany(mappedBy = "friendships")
+    private List<User> friendships;
+
 
     @JsonIgnoreProperties({"users"})
     @OneToMany(mappedBy = "user")
@@ -81,11 +82,11 @@ public class User {
         this.email = email;
     }
 
-    public List<Friendship> getFriendships() {
+    public List<User> getFriendships() {
         return friendships;
     }
 
-    public void setFriendships(List<Friendship> friendship) {
+    public void setFriendships(List<User> friendship) {
         this.friendships = friendship;
     }
 
@@ -100,11 +101,11 @@ public class User {
 
 //    Methods
 
-    public void addFriendship(Friendship friendship){
+    public void addFriendship(User friendship){
         this.friendships.add(friendship);
     }
 
-    public void removeFriendship(Friendship friendship){
+    public void removeFriendship(User friendship){
         this.friendships.remove(friendship);
     }
 
