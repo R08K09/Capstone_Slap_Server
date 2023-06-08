@@ -2,8 +2,8 @@ package com.example.slap_server.models;
 
 import jakarta.persistence.*;
 
-@Entity(name = "friendships")
-public class Friendship {
+@Entity(name = "relationships")
+public class Relationship {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,12 +19,12 @@ public class Friendship {
     private User second_user;
 
 
-    public Friendship(User first_user, User second_user){
+    public Relationship(User first_user, User second_user){
         this.first_user = first_user;
         this.second_user = second_user;
     }
 
-    public Friendship(){
+    public Relationship(){
 
     }
 
