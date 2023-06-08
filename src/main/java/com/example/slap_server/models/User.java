@@ -23,7 +23,12 @@ public class User {
     @Column(name = "email")
     private String email;
 
-    @ManyToMany(mappedBy = "friendships")
+    @ManyToMany
+    @JoinTable(
+            name = "friendships",
+            joinColumns={@JoinColumn(name = "user1_id", referencedColumnName = "id")},
+            inverseJoinColumns={@JoinColumn(name = "user2_id", referencedColumnName = "id")}
+    )
     private List<User> friendships;
 
 

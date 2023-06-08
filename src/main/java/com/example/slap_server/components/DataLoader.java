@@ -27,8 +27,19 @@ public class DataLoader implements ApplicationRunner {
     public void run(ApplicationArguments args) throws Exception{
 
         User user1 = new User ("Natasha", "Hi", "SubrinaSmells@gmail.com");
+        userRepository.save(user1);
 
-        Slap slap1 = new Slap (":wave:","Hi everyone", user1);
+        User user2 = new User("Anna", "hi", "anna@email");
+        userRepository.save(user2);
+
+        User user3 = new User("Rada", "hi", "rada@email");
+        userRepository.save(user3);
+
+        user1.addFriendship(user2);
+        userRepository.save(user1);
+
+        user3.addFriendship(user1);
+        userRepository.save(user3);
 
     }
 
