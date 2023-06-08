@@ -14,25 +14,4 @@ import java.util.List;
 @RequestMapping(value = "/slaps")
 public class SlapController {
 
-    @Autowired
-    SlapService slapService;
-
-    @Autowired
-    SlapRepository slapRepository;
-
-    @GetMapping
-    public ResponseEntity<List<Slap>> getAllSlaps(){
-        return new ResponseEntity<>(slapService.findAllSlaps(), HttpStatus.OK);
-    }
-
-    @GetMapping(value = "/{id}")
-    public ResponseEntity<Slap> getSlapById(@PathVariable Long id){
-        return new ResponseEntity<>(slapService.findSlapById(id), HttpStatus.OK);
-    }
-
-    @GetMapping(value = "/{userId}")
-    public ResponseEntity<List<Slap>> getSlapByUser(@PathVariable Long userId){
-        return new ResponseEntity<>(slapService.findSlapByUser(userId), HttpStatus.OK);
-    }
-
 }
