@@ -126,6 +126,10 @@ public class User {
         this.following.remove(user);
     }
 
+    public void removeFollower(User user){
+        this.followers.remove(user);
+    }
+
     public void addSlap(Slap slap){
         this.slaps.add(slap);
     }
