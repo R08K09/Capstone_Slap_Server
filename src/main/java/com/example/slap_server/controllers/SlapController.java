@@ -32,14 +32,14 @@ public class SlapController {
     }
 
     @GetMapping(value = "/{id}")
-    public ResponseEntity<Slap> getSlapById(@PathVariable Long id){
-        try { return new ResponseEntity<>(slapService.findSlapById(id), HttpStatus.OK);
+    public ResponseEntity<Slap> SlapById(@PathVariable Long id){
+       try { return new ResponseEntity<>(slapService.findSlapById(id), HttpStatus.OK);
         } catch (NoSuchElementException e) {
             return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
         }
     }
 
-    @GetMapping(value = "/{userId}")
+    @GetMapping(value = "/fromUser/{userId}")
     public ResponseEntity<List<Slap>> getSlapByUser(@PathVariable Long userId){
         try { return new ResponseEntity<>(slapService.findSlapByUser(userId), HttpStatus.OK);
         } catch (NoSuchElementException e) {

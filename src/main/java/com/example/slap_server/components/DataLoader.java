@@ -42,15 +42,19 @@ public class DataLoader implements ApplicationRunner {
         user1.addUserToFollow(user2);
         user1.addUserToFollow(user3);
         user1.addUserToFollow(user4);
+        userRepository.save(user1);
 
         user2.addUserToFollow(user4);
         user2.addUserToFollow(user3);
+        userRepository.save(user2);
 
         user3.addUserToFollow(user1);
         user3.addUserToFollow(user2);
+        userRepository.save(user3);
 
         user4.addUserToFollow(user2);
         user4.addUserToFollow(user1);
+        userRepository.save(user4);
 
 
 
@@ -64,6 +68,7 @@ public class DataLoader implements ApplicationRunner {
         Slap slap3 = new Slap ("U+1F600", "Nvm, false alarm!", user2);
         user2.addSlap(slap2);
         slapRepository.save(slap2);
+
         user2.addSlap(slap3);
         slapRepository.save(slap3);
 
