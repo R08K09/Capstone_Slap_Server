@@ -19,7 +19,7 @@ public class UserService {
     UserRepository userRepository;
 
     @Autowired
-    SlapService slapService;
+    SlapRepository slapRepository;
 
 
     public List<User> getAllUsers(){
@@ -55,12 +55,11 @@ public class UserService {
     public void deleteUser(Long id) {
         User userToDelete = userRepository.findById(id).get();
         ArrayList<Long> slapIdsToDelete = new ArrayList<>();
-        ArrayList<User> usersToUnfollow = new ArrayList<>();
         for (Slap slap : userToDelete.getSlaps()) {
             slapIdsToDelete.add(slap.getId());
         }
         for (Long slapId : slapIdsToDelete) {
-            slapService.deleteSlapById(slapId);
+            slapRepository.deleteById(slapId);
         }
 //        remove userToDelete follows
         for(int i = 0; i < userToDelete.getFollowing().size(); i++){

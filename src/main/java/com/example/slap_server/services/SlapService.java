@@ -44,7 +44,7 @@ public class SlapService {
         User user = userService.getUserById(slapDTO.getUserId());
         Slap slap = new Slap(slapDTO.getMood(), slapDTO.getMessage(), user);
         slapRepository.save(slap);
-        userService.
+//        userService.
     }
 }
 
