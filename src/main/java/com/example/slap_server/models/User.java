@@ -48,6 +48,7 @@ public class User {
         this.bio = bio;
         this.email = email;
         this.following = new ArrayList<>();
+        this.followers = new ArrayList<>();
         this.slaps = new ArrayList<>();
     }
 
@@ -59,6 +60,7 @@ public class User {
 
 
     // Getters & Setters
+
     public long getId() {
         return id;
     }
@@ -114,8 +116,6 @@ public class User {
     public void setSlaps(List<Slap> slaps) {
         this.slaps = slaps;
     }
-
-
 //    Methods
 
     public void addUserToFollow(User user){
@@ -124,6 +124,10 @@ public class User {
 
     public void unfollow(User user){
         this.following.remove(user);
+    }
+
+    public void removeFollower(User user){
+        this.followers.remove(user);
     }
 
     public void addSlap(Slap slap){

@@ -4,21 +4,30 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UserDTO {
-    //    Properties
-    private long id;
+
+    // Properties:
+
     private String username;
+
     private String bio;
+
     private String email;
-    private List<User> friends;
-    private List<Slap> slaps;
+
+//    private List<User> following;
+//
+//    private List<User> followers;
+//
+//    private List<Slap> slaps;
+
 
     // Constructor
     public UserDTO(String username, String bio, String email){
         this.username = username;
         this.bio = bio;
         this.email = email;
-        this.friends = new ArrayList<>();
-        this.slaps = new ArrayList<>();
+//        this.following = new ArrayList<>();
+//        this.followers = new ArrayList<>();
+//        this.slaps = new ArrayList<>();
     }
 
 
@@ -27,15 +36,7 @@ public class UserDTO {
 
     }
 
-
     // Getters & Setters
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
 
     public String getUsername() {
         return username;
@@ -61,19 +62,27 @@ public class UserDTO {
         this.email = email;
     }
 
-    public List<User> getFriends() {
-        return friends;
-    }
-
-    public void setFriends(List<User> friends) {
-        this.friends = friends;
-    }
-
-    public List<Slap> getSlaps() {
-        return slaps;
-    }
-
-    public void setSlaps(List<Slap> slaps) {
-        this.slaps = slaps;
-    }
+//    public List<User> getFollowing() {
+//        return following;
+//    }
+//
+//    public void setFollowing(List<User> following) {
+//        this.following = following;
+//    }
+//
+//    public List<User> getFollowers() {
+//        return followers;
+//    }
+//
+//    public void setFollowers(List<User> followers) {
+//        this.followers = followers;
+//    }
+//
+//    public List<Slap> getSlaps() {
+//        return slaps;
+//    }
+//
+//    public void setSlaps(List<Slap> slaps) {
+//        this.slaps = slaps;
+//    }
 }

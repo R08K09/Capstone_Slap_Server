@@ -26,13 +26,12 @@ public class DataLoader implements ApplicationRunner {
     @Override
     public void run(ApplicationArguments args) throws Exception{
 
-        User user1 = new User ("Natasha", "Hi", "SubrinaSmells@gmail.com");
-        userRepository.save(user1);
+        User user1 = new User ("tasha", "Someone slap me!", "natasha@bnta.com");
 
-        User user2 = new User("Anna", "hi", "anna@email");
+        User user2 = new User("Zaynah99", "Slap me and i'll slap you back", "zaynah@bnta.com");
         userRepository.save(user2);
 
-        User user3 = new User("Rada", "hi", "rada@email");
+        User user3 = new User("Radaaa", "Hi guys!!", "rada@bnta.com");
         userRepository.save(user3);
 
         user1.addUserToFollow(user2);
@@ -40,6 +39,12 @@ public class DataLoader implements ApplicationRunner {
 
         user3.addUserToFollow(user1);
         userRepository.save(user3);
+
+
+        Slap slap1 = new Slap (":wave:", "Hey, I'm new to Slap. Follow me!!", user1);
+        user1.addSlap(slap1);
+        slapRepository.save(slap1);
+        userRepository.save(user1);
 
     }
 
