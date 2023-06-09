@@ -69,7 +69,7 @@ public class SlapController {
     public ResponseEntity<Void> deleteSlap(@PathVariable Long id) {
         try {
         slapService.deleteSlap(id);
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        return new ResponseEntity<>(HttpStatus.OK);
         } catch (NoSuchElementException e) {
             return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
         }

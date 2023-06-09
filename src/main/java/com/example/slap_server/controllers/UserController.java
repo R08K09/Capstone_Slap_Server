@@ -19,25 +19,25 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-@GetMapping
-public ResponseEntity<List<UserDTO>> getAllUsers() {
-    try {
-        List<User> users = userService.getAllUsers();
-        List<UserDTO> userDTOs = new ArrayList<>();
+    @GetMapping
+    public ResponseEntity<List<UserDTO>> getAllUsers() {
+        try {
+            List<User> users = userService.getAllUsers();
+            List<UserDTO> userDTOs = new ArrayList<>();
 
-        for (User user : users) {
-            UserDTO userDTO = userService.convertToUserDTO(user);
-            userDTO.setFollowerIds(user.getFollowers().stream().map(User::getId).collect(Collectors.toList()));
-            userDTO.setFollowingIds(user.getFollowing().stream().map(User::getId).collect(Collectors.toList()));
-            userDTO.setSlapIds(user.getSlaps().stream().map(Slap::getId).collect(Collectors.toList()));
-            userDTOs.add(userDTO);
+            for (User user : users) {
+                UserDTO userDTO = userService.convertToUserDTO(user);
+                userDTO.setFollowerIds(user.getFollowers().stream().map(User::getId).collect(Collectors.toList()));
+                userDTO.setFollowingIds(user.getFollowing().stream().map(User::getId).collect(Collectors.toList()));
+                userDTO.setSlapIds(user.getSlaps().stream().map(Slap::getId).collect(Collectors.toList()));
+                userDTOs.add(userDTO);
+            }
+
+            return new ResponseEntity<>(userDTOs, HttpStatus.OK);
+        } catch (NoSuchElementException e) {
+            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
         }
-
-        return new ResponseEntity<>(userDTOs, HttpStatus.OK);
-    } catch (NoSuchElementException e) {
-        return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
     }
-}
 
     @GetMapping("/{id}")
     public ResponseEntity<UserDTO> getUserById(@PathVariable("id") Long id) {
@@ -55,20 +55,32 @@ public ResponseEntity<List<UserDTO>> getAllUsers() {
 
     @PostMapping
     public ResponseEntity<UserDTO> createUser(@RequestBody UserDTO userDTO) {
-        UserDTO createdUser = userService.createUser(userDTO);
-        return new ResponseEntity<>(createdUser, HttpStatus.CREATED);
+        try {
+            UserDTO createdUser = userService.createUser(userDTO);
+            return new ResponseEntity<>(createdUser, HttpStatus.CREATED);
+        } catch (NoSuchElementException e) {
+            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+        }
     }
 
     @PatchMapping("/{id}")
     public ResponseEntity<UserDTO> updateUser(@PathVariable("id") Long id, @RequestBody UserDTO userDTO) {
-        UserDTO updatedUser = userService.updateUser(userDTO, id);
-        return new ResponseEntity<>(updatedUser, HttpStatus.OK);
+        try {
+            UserDTO updatedUser = userService.updateUser(userDTO, id);
+            return new ResponseEntity<>(updatedUser, HttpStatus.OK);
+        } catch (NoSuchElementException e) {
+            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+        }
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteUser(@PathVariable("id") Long id) {
-        userService.deleteUser(id);
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        try {
+            userService.deleteUser(id);
+            return new ResponseEntity<>(HttpStatus.OK);
+        } catch (NoSuchElementException e) {
+            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+        }
     }
 
 }
