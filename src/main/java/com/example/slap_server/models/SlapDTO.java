@@ -5,18 +5,17 @@ import java.time.LocalDateTime;
 public class SlapDTO {
 
 //   Properties
-    private long id;
     private LocalDateTime dateTime;
     private String mood;
     private String message;
-    private User user;
+    private Long userId;
 
 // Constructor
-    public SlapDTO (LocalDateTime dateTime, String mood, String message, User user){
-        this.dateTime = dateTime;
+    public SlapDTO (String mood, String message, Long userId){
+        this.dateTime = LocalDateTime.now();
         this.mood = mood;
         this.message = message;
-        this.user = user;
+        this.userId = userId;
     }
 
 
@@ -27,13 +26,6 @@ public class SlapDTO {
 
 
 //    Getters and setters
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
 
     public LocalDateTime getDateTime() {
         return dateTime;
@@ -59,11 +51,11 @@ public class SlapDTO {
         this.message = message;
     }
 
-    public User getUser() {
-        return user;
+    public Long getUserId() {
+        return userId;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 }

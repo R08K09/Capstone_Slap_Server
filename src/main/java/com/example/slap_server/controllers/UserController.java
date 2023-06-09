@@ -1,4 +1,6 @@
 package com.example.slap_server.controllers;
+import com.example.slap_server.models.Slap;
+import com.example.slap_server.models.SlapDTO;
 import com.example.slap_server.models.User;
 import com.example.slap_server.models.UserDTO;
 import com.example.slap_server.services.UserService;
@@ -48,19 +50,10 @@ public class UserController {
         return new ResponseEntity<>(updateUser,HttpStatus.OK);
     }
 
-    @DeleteMapping(value = "/{id}")
-    public ResponseEntity<Long> deleteUser (@PathVariable Long id){
-        userService.deleteUser(id);
-        return new ResponseEntity<>(id, HttpStatus.OK);
-    }
-
-
-
-
-
-
-
-
-
+//    @DeleteMapping(value = "/{id}")
+//    public ResponseEntity<Long> deleteUser (@PathVariable Long id){
+//        userService.deleteUser(id);
+//        return new ResponseEntity<>(id, HttpStatus.OK);
+//    }
 
 }

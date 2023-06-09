@@ -1,6 +1,7 @@
 package com.example.slap_server.controllers;
 
 import com.example.slap_server.models.Slap;
+import com.example.slap_server.models.SlapDTO;
 import com.example.slap_server.repositories.SlapRepository;
 import com.example.slap_server.services.SlapService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,8 +42,10 @@ public class SlapController {
         return new ResponseEntity<>(id, HttpStatus.OK);
     }
 
-
-
-
+    @PostMapping(value = "/createSlap")
+    public ResponseEntity<List<Slap>> createSlap(@RequestBody SlapDTO slapDTO) {
+        slapService.saveSlap(slapDTO);
+        return new ResponseEntity<>(slapService.findAllSlaps(), HttpStatus.CREATED);
+    }
 
 }
