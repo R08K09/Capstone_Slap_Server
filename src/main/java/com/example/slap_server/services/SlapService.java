@@ -8,43 +8,96 @@ import com.example.slap_server.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
+import java.util.stream.Collectors;
 
 @Service
 public class SlapService {
+    @Autowired
+    private SlapRepository slapRepository;
 
     @Autowired
-    SlapRepository slapRepository;
+    UserRepository userRepository;
 
-    @Autowired
-    UserService userService;
+    public List<SlapDTO> findAllSlaps() {
+        List<Slap> slaps = slapRepository.findAll();
+        List<SlapDTO> slapDTOs = new ArrayList<>();
 
-    public List<Slap> findAllSlaps(){
-        return slapRepository.findAll();
+        for (Slap slap : slaps) {
+            SlapDTO slapDTO = new SlapDTO();
+            slapDTO.setDateTime(slap.getDateTime());
+            slapDTO.setMood(slap.getMood());
+            slapDTO.setMessage(slap.getMessage());
+            slapDTO.setUserId(slap.getUser().getId());
+            slapDTOs.add(slapDTO);
+        }
+
+        return slapDTOs;
     }
 
-    public Slap findSlapById(Long id){
-        return slapRepository.findById(id).get();
+    public SlapDTO findSlapById(Long id) {
+        Slap slap = slapRepository.findById(id).orElseThrow(() -> new NoSuchElementException("Slap not found"));
+        SlapDTO slapDTO = new SlapDTO();
+        slapDTO.setDateTime(slap.getDateTime());
+        slapDTO.setMood(slap.getMood());
+        slapDTO.setMessage(slap.getMessage());
+        slapDTO.setUserId(slap.getUser().getId());
+        return slapDTO;
     }
 
-    public List<Slap> findSlapByUser(Long user_id){
-        return slapRepository.findSlapByUserId(user_id);
+    // converting each slap object to its corresponding 'SlapDTO' representation without setting the id explictily
+    public SlapDTO convertToSlapDTO(Slap slap) {
+        SlapDTO slapDTO = new SlapDTO();
+        slapDTO.setDateTime(slap.getDateTime());
+        slapDTO.setMood(slap.getMood());
+        slapDTO.setMessage(slap.getMessage());
+        slapDTO.setUserId(slap.getUser().getId());
+        return slapDTO;
     }
 
-    public void deleteSlapById(Long id){
-        slapRepository.deleteById(id);
+    public List<SlapDTO> findSlapsByUserId(Long userId) {
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new NoSuchElementException("User not found with ID: " + userId));
+        List<Slap> slaps = slapRepository.findByUser(user);
+        return slaps.stream().map(this::convertToSlapDTO).collect(Collectors.toList());
     }
 
-    public void saveSlap(SlapDTO slapDTO) {
-//        String messageSlap = slapDTO.getMessage(); // maybe do getMood() too
-//        String moodSlap = slapDTO.getMood();
-//        User userSlap = userRepository.findById(slapDTO.getUserId()).get();
-//        Slap slap = slapRepository.findById(slapDTO.getUserId()).get();
-//        Slap createdSlap = new Slap(moodSlap, messageSlap, userSlap);
-        User user = userService.getUserById(slapDTO.getUserId());
-        Slap slap = new Slap(slapDTO.getMood(), slapDTO.getMessage(), user);
+    public SlapDTO createSlap(SlapDTO slapDTO) {
+        User user = userRepository.findById(slapDTO.getUserId()).orElseThrow(() -> new NoSuchElementException("User not found"));
+
+        Slap slap = new Slap();
+        slap.setDateTime(LocalDateTime.now());
+        slap.setMood(slapDTO.getMood());
+        slap.setMessage(slapDTO.getMessage());
+        slap.setUser(user);
         slapRepository.save(slap);
-//        userService.
+
+        SlapDTO createdSlapDTO = new SlapDTO();
+        createdSlapDTO.setDateTime(slap.getDateTime());
+        createdSlapDTO.setMood(slap.getMood());
+        createdSlapDTO.setMessage(slap.getMessage());
+        createdSlapDTO.setUserId(slap.getUser().getId());
+        return createdSlapDTO;
+    }
+
+    public SlapDTO updateSlap(SlapDTO slapDTO, Long slapId) {
+        Slap slap = slapRepository.findById(slapId).orElseThrow(() -> new NoSuchElementException("Slap not found"));
+        slap.setMood(slapDTO.getMood());
+        slap.setMessage(slapDTO.getMessage());
+        slapRepository.save(slap);
+
+        SlapDTO updatedSlapDTO = new SlapDTO();
+        updatedSlapDTO.setDateTime(slap.getDateTime());
+        updatedSlapDTO.setMood(slap.getMood());
+        updatedSlapDTO.setMessage(slap.getMessage());
+        updatedSlapDTO.setUserId(slap.getUser().getId());
+        return updatedSlapDTO;
+    }
+
+    public void deleteSlap(Long slapId) {
+        slapRepository.deleteById(slapId);
     }
 }
-

@@ -11,6 +11,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
+import java.util.stream.Collectors;
 
 @Service
 public class UserService {
@@ -21,36 +23,59 @@ public class UserService {
     @Autowired
     SlapRepository slapRepository;
 
+    public UserDTO convertToUserDTO(User user) {
+        UserDTO userDTO = new UserDTO();
+        userDTO.setUsername(user.getUsername());
+        userDTO.setBio(user.getBio());
+        userDTO.setEmail(user.getEmail());
+        userDTO.setFollowerIds(user.getFollowers().stream().map(User::getId).collect(Collectors.toList()));
+        userDTO.setFollowingIds(user.getFollowing().stream().map(User::getId).collect(Collectors.toList()));
+        userDTO.setSlapIds(user.getSlaps().stream().map(Slap::getId).collect(Collectors.toList()));
+        return userDTO;
+    }
 
-    public List<User> getAllUsers(){
+
+
+    public List<User> getAllUsers() {
         return userRepository.findAll();
     }
 
     public User getUserById(Long id) {
-        return userRepository.findById(id).get();
+        User user = userRepository.findById(id).orElseThrow(() -> new NoSuchElementException("User not found"));
+        UserDTO userDTO = new UserDTO();
+        userDTO.setUsername(user.getUsername());
+        userDTO.setBio(user.getBio());
+        userDTO.setEmail(user.getEmail());
+        return user;
     }
 
-    public User createUser(User user) {
-        return userRepository.save(user);
+    public UserDTO createUser(UserDTO userDTO) {
+        User user = new User();
+        user.setUsername(userDTO.getUsername());
+        user.setBio(userDTO.getBio());
+        user.setEmail(userDTO.getEmail());
+        userRepository.save(user);
+
+        UserDTO createdUserDTO = new UserDTO();
+        createdUserDTO.setUsername(user.getUsername());
+        createdUserDTO.setBio(user.getBio());
+        createdUserDTO.setEmail(user.getEmail());
+        return createdUserDTO;
     }
 
-    public User updateUserName(String username, Long userId){
-        User user = userRepository.findById(userId).get();
-        user.setUsername(username);
-        return userRepository.save(user);
+    public UserDTO updateUser(UserDTO userDTO, Long userId) {
+        User user = userRepository.findById(userId).orElseThrow(() -> new NoSuchElementException("User not found"));
+        user.setUsername(userDTO.getUsername());
+        user.setBio(userDTO.getBio());
+        user.setEmail(userDTO.getEmail());
+        userRepository.save(user);
+
+        UserDTO updatedUserDTO = new UserDTO();
+        updatedUserDTO.setUsername(user.getUsername());
+        updatedUserDTO.setBio(user.getBio());
+        updatedUserDTO.setEmail(user.getEmail());
+        return updatedUserDTO;
     }
-
-//    COME BACK TO THIS::
-    public User updateUser(UserDTO userDTO, Long userId){
-        User userToUpdate = userRepository.findById(userId).get();
-        userToUpdate.setUsername(userDTO.getUsername());
-        userToUpdate.setBio(userDTO.getBio());
-        userToUpdate.setEmail(userDTO.getEmail());
-        userRepository.save(userToUpdate);
-        return userToUpdate;
-    }
-
-
 
     public void deleteUser(Long id) {
         User userToDelete = userRepository.findById(id).get();
@@ -71,12 +96,4 @@ public class UserService {
         }
         userRepository.deleteById(id);
     }
-
-
-
-
-
-
-
-
 }
