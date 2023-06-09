@@ -5,7 +5,6 @@ import com.example.slap_server.models.User;
 import com.example.slap_server.models.UserDTO;
 import com.example.slap_server.repositories.SlapRepository;
 import com.example.slap_server.repositories.UserRepository;
-import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -53,23 +52,22 @@ public class UserService {
         return userToUpdate;
     }
 
+
     public void deleteUser(Long id) {
         User userToDelete = userRepository.findById(id).get();
         ArrayList<Long> slapIdsToDelete = new ArrayList<>();
+        ArrayList<User> usersToUnfollow = new ArrayList<>();
         for (Slap slap : userToDelete.getSlaps()) {
             slapIdsToDelete.add(slap.getId());
         }
         for (Long slapId : slapIdsToDelete) {
             slapService.deleteSlapById(slapId);
         }
-//        for (Slap slap : userToDelete.getSlaps()){
-//            userToDelete.removeSlap(slap);
-////            slapService.deleteSlapById(slap.getId());
-//            slapRepository.delete(slap);
-//        }
-        for (User userFollowing : userToDelete.getFollowing()){
-            userToDelete.unfollow(userFollowing);
+//        remove userToDelete follows
+        for(int i = 0; i < userToDelete.getFollowing().size(); i++){
+            userToDelete.unfollow(userToDelete.getFollowing().get(i));
         }
+//        Remove userToDelete from other users following list
         for (User userFollower : userToDelete.getFollowers()){
             userFollower.unfollow(userToDelete);
         }
