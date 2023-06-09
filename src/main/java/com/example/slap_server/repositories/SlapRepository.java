@@ -12,4 +12,6 @@ public interface SlapRepository extends JpaRepository <Slap, Long> {
 
 //    List<SlapDTO> findSlapByUserId(Long user_id);
     List<Slap> findByUser(User user);
+
+    List<Slap> findByUserOrderByDateTimeDesc(User user);
 }

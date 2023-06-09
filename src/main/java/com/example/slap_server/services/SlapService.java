@@ -6,6 +6,7 @@ import com.example.slap_server.models.User;
 import com.example.slap_server.repositories.SlapRepository;
 import com.example.slap_server.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -23,7 +24,7 @@ public class SlapService {
     UserRepository userRepository;
 
     public List<SlapDTO> findAllSlaps() {
-        List<Slap> slaps = slapRepository.findAll();
+        List<Slap> slaps = slapRepository.findAll(Sort.by(Sort.Direction.DESC, "dateTime"));
         List<SlapDTO> slapDTOs = new ArrayList<>();
 
         for (Slap slap : slaps) {
@@ -61,7 +62,7 @@ public class SlapService {
     public List<SlapDTO> findSlapsByUserId(Long userId) {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new NoSuchElementException("User not found with ID: " + userId));
-        List<Slap> slaps = slapRepository.findByUser(user);
+        List<Slap> slaps = slapRepository.findByUserOrderByDateTimeDesc(user);
         return slaps.stream().map(this::convertToSlapDTO).collect(Collectors.toList());
     }
 
