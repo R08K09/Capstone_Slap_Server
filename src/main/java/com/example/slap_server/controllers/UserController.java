@@ -1,6 +1,4 @@
 package com.example.slap_server.controllers;
-import com.example.slap_server.models.Slap;
-import com.example.slap_server.models.SlapDTO;
 import com.example.slap_server.models.User;
 import com.example.slap_server.models.UserDTO;
 import com.example.slap_server.services.UserService;
@@ -10,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
 @RestController
 @RequestMapping(value = "/users")
@@ -21,39 +20,63 @@ public class UserController {
 
     @GetMapping
     public ResponseEntity<List<User>>displayAllUsers(){
-        return new ResponseEntity<>(userService.getAllUsers(), HttpStatus.OK);
+        try {
+            return new ResponseEntity<>(userService.getAllUsers(), HttpStatus.OK);
+        } catch (NoSuchElementException e){
+            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+        }
     }
 
     @PostMapping
     public ResponseEntity<User>createUser(@RequestBody User user){
-        return new ResponseEntity<>(userService.createUser(user),HttpStatus.CREATED);
+        try {
+            return new ResponseEntity<>(userService.createUser(user),HttpStatus.CREATED);
+        }catch (NoSuchElementException e){
+            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+        }
     }
 
 //     INDEX:
     @GetMapping(value = "/{userId}")
     public ResponseEntity<User>displayUserById(@PathVariable Long userId){
-        return new ResponseEntity<>(userService.getUserById(userId),HttpStatus.OK);
+        try{
+            return new ResponseEntity<>(userService.getUserById(userId),HttpStatus.OK);
+        } catch(NoSuchElementException e){
+            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+        }
     }
 
 
 // EDIT:
     @GetMapping(value = "/{userId}/edit")
     public ResponseEntity<User> editUser (@PathVariable Long userId){
-        User foundUser = userService.getUserById(userId);
-        return new ResponseEntity<>(foundUser, HttpStatus.OK);
+        try{
+            User foundUser = userService.getUserById(userId);
+            return new ResponseEntity<>(foundUser, HttpStatus.OK);
+        } catch (NoSuchElementException e){
+            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+        }
     }
 
 // UPDATE:
     @PatchMapping(value = "/{userId}")
     public ResponseEntity<User> updateUser(@PathVariable Long userId, @RequestBody UserDTO userDTO){
-        User updateUser = userService.updateUser(userDTO, userId);
-        return new ResponseEntity<>(updateUser,HttpStatus.OK);
+        try {
+            User updateUser = userService.updateUser(userDTO, userId);
+            return new ResponseEntity<>(updateUser,HttpStatus.OK);
+        } catch (NoSuchElementException e){
+            return new ResponseEntity<>(null, HttpStatus.NOT_ACCEPTABLE);
+        }
     }
 
     @DeleteMapping(value = "/{id}")
     public ResponseEntity<Long> deleteUser (@PathVariable Long id){
-        userService.deleteUser(id);
-        return new ResponseEntity<>(id, HttpStatus.OK);
+        try {
+            userService.deleteUser(id);
+            return new ResponseEntity<>(id, HttpStatus.OK);
+        } catch  (NoSuchElementException e){
+            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+        }
     }
 
 }
