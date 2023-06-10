@@ -8,7 +8,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.NoSuchElementException;
 
 @RestController
 @RequestMapping(value = "/slaps")
@@ -17,49 +16,54 @@ public class SlapController {
     @Autowired
     SlapService slapService;
 
+
+    // INDEX
     @GetMapping
-    public ResponseEntity<List<Slap>> getAllSlaps(){
+    public ResponseEntity<List<Slap>> getAllSlapsAndFilters(@RequestParam(required=false, name="userId") Long userId){
+        if (userId != null){
+            return new ResponseEntity<>(slapService.findSlapsByUserId(userId), HttpStatus.OK);
+        }
         return new ResponseEntity<>(slapService.findAllSlaps(), HttpStatus.OK);
     }
 
+
+    // SHOW
     @GetMapping("/{id}")
     public ResponseEntity<Slap> getSlapById(@PathVariable Long id) {
         return new ResponseEntity<>(slapService.findSlapById(id), HttpStatus.OK);
     }
 
-    @GetMapping(value = "/fromUser/{userId}")
-    public ResponseEntity<List<SlapDTO>> getSlapByUser(@PathVariable Long userId) {
-        try {
-            List<SlapDTO> slapDTOs = slapService.findSlapsByUserId(userId);
-            return new ResponseEntity<>(slapDTOs, HttpStatus.OK);
-        } catch (NoSuchElementException e) {
-            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
-        }
-    }
+//    @GetMapping(value = "/fromUser/{userId}")
+//    public ResponseEntity<List<SlapDTO>> getSlapByUser(@PathVariable Long userId) {
+//        try {
+//            List<SlapDTO> slapDTOs = slapService.findSlapsByUserId(userId);
+//            return new ResponseEntity<>(slapDTOs, HttpStatus.OK);
+//        } catch (NoSuchElementException e) {
+//            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+//        }
+//    }
 
+
+    // CREATE
     @PostMapping
     public ResponseEntity<SlapDTO> createSlap(@RequestBody SlapDTO slapDTO) {
-        try {
-            slapService.createSlap(slapDTO);
-            return new ResponseEntity<>(slapDTO, HttpStatus.CREATED);
-        } catch (NoSuchElementException e) {
-            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
-        }
+        slapService.createSlap(slapDTO);
+        return new ResponseEntity<>(slapDTO, HttpStatus.CREATED);
     }
 
+
+    // UPDATE
     @PatchMapping("/{id}")
-    public ResponseEntity<Slap> updateSlap(@PathVariable Long id, @RequestBody SlapDTO slapDTO) {
+    public ResponseEntity<Slap> updateSlap(@RequestBody SlapDTO slapDTO, @PathVariable Long id) {
         Slap slap = slapService.updateSlap(slapDTO, id);
         return new ResponseEntity<>(slap, HttpStatus.OK);
     }
 
+
+    // DELETE
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteSlap(@PathVariable Long id) {
-        try {
-            slapService.deleteSlap(id);
-            return new ResponseEntity<>(HttpStatus.OK);
-        } catch (NoSuchElementException e) {
-            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
-        }
+    public ResponseEntity<Long> deleteSlap(@PathVariable Long id) {
+        slapService.deleteSlap(id);
+        return new ResponseEntity<>(id, HttpStatus.OK);
     }
 }

@@ -11,7 +11,7 @@ public class SlapDTO {
     private Long userId;
 
     // Constructor
-    public SlapDTO (String mood, String message, Long userId){
+    public SlapDTO(String mood, String message, Long userId){
         this.dateTime = LocalDateTime.now();
         this.mood = mood;
         this.message = message;
