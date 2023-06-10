@@ -25,8 +25,7 @@ public class SlapDTO {
     }
 
 
-//    Getters and setters
-
+    // Getters and setters
     public LocalDateTime getDateTime() {
         return dateTime;
     }

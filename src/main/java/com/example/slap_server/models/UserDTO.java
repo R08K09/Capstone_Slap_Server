@@ -5,13 +5,12 @@ import java.util.List;
 
 public class UserDTO {
 
-    // Properties:
-
+    // Properties
     private String username;
     private String bio;
     private String email;
-    private List<Long> followerIds;
     private List<Long> followingIds;
+    private List<Long> followerIds;
     private List<Long> slapIds;
 
 
@@ -31,8 +30,8 @@ public class UserDTO {
 
     }
 
-    // Getters & Setters
 
+    // Getters & Setters
     public String getUsername() {
         return username;
     }

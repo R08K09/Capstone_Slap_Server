@@ -13,6 +13,7 @@ import java.util.NoSuchElementException;
 @RestController
 @RequestMapping(value = "/slaps")
 public class SlapController {
+
     @Autowired
     SlapService slapService;
 

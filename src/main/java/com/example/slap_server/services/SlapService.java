@@ -30,27 +30,11 @@ public class SlapService {
     public List<Slap> findAllSlaps() {
 //        List<Slap> slaps = slapRepository.findAll(Sort.by(Sort.Direction.DESC, "dateTime"));
 
-//        List<SlapDTO> slapDTOs = new ArrayList<>();
-
-//        for (Slap slap : slaps) {
-//            SlapDTO slapDTO = new SlapDTO();
-//            slapDTO.setDateTime(slap.getDateTime());
-//            slapDTO.setMood(slap.getMood());
-//            slapDTO.setMessage(slap.getMessage());
-//            slapDTO.setUserId(slap.getUser().getId());
-//            slapDTOs.add(slapDTO);
-//        }
-
         return slapRepository.findAll();
     }
 
     public Slap findSlapById(Long id) {
         Slap slap = slapRepository.findById(id).orElseThrow(() -> new NoSuchElementException("Slap not found"));
-//        SlapDTO slapDTO = new SlapDTO();
-//        slapDTO.setDateTime(slap.getDateTime());
-//        slapDTO.setMood(slap.getMood());
-//        slapDTO.setMessage(slap.getMessage());
-//        slapDTO.setUserId(slap.getUser().getId());
         return slap;
     }
 
