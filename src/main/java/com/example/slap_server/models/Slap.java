@@ -29,11 +29,10 @@ public class Slap {
 
 
     // Constructor
-    public Slap(String mood, String message, User user){
+    public Slap(String mood, String message){
         this.dateTime = LocalDateTime.now();
         this.mood = mood;
         this.message = message;
-        this.user = user;
     }
 
 

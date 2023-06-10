@@ -1,7 +1,6 @@
 package com.example.slap_server.services;
 
 import com.example.slap_server.models.Slap;
-import com.example.slap_server.models.SlapDTO;
 import com.example.slap_server.models.User;
 import com.example.slap_server.models.UserDTO;
 import com.example.slap_server.repositories.SlapRepository;
@@ -11,6 +10,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
+import java.util.Optional;
 
 @Service
 public class UserService {
@@ -26,42 +27,62 @@ public class UserService {
         return userRepository.findAll();
     }
 
-    public User getUserById(Long id) {
+    public User getUserById(Long id){
         return userRepository.findById(id).get();
     }
 
-    public User createUser(User user) {
-        return userRepository.save(user);
+
+    public User createUser(UserDTO userDTO) {
+        User newUser = new User(userDTO.getUsername(), userDTO.getBio(), userDTO.getEmail());
+        if(userDTO.getFollowingIds() != null){
+            for(Long followingId : userDTO.getFollowingIds()){
+                User user = userRepository.findById(followingId).get();
+                newUser.addUserToFollow(user);
+            }
+        }
+        if(userDTO.getSlapIds() != null){
+            for(Long slapId : userDTO.getSlapIds()){
+                Slap slap = slapRepository.findById(slapId).get();
+                newUser.addSlap(slap);
+            }
+        }
+
+        return userRepository.save(newUser);
     }
 
-    public User updateUserName(String username, Long userId){
-        User user = userRepository.findById(userId).get();
-        user.setUsername(username);
-        return userRepository.save(user);
-    }
-
-//    COME BACK TO THIS::
-    public User updateUser(UserDTO userDTO, Long userId){
-        User userToUpdate = userRepository.findById(userId).get();
-        userToUpdate.setUsername(userDTO.getUsername());
-        userToUpdate.setBio(userDTO.getBio());
-        userToUpdate.setEmail(userDTO.getEmail());
+    public User updateUser(UserDTO userDTO, Long userId) {
+        User userToUpdate = userRepository.findById(userId).orElseThrow(() -> new NoSuchElementException("User not found"));
+        if(userDTO.getUsername() != null){
+            userToUpdate.setUsername(userDTO.getUsername());
+        }
+        if(userDTO.getBio() != null){
+            userToUpdate.setBio(userDTO.getBio());
+        }
+        if(userDTO.getEmail() != null){
+            userToUpdate.setEmail(userDTO.getEmail());
+        }
+        if(userDTO.getSlapIds() != null){
+            userToUpdate.setSlaps(new ArrayList<Slap>());
+            for(long slapIds : userDTO.getSlapIds()){
+                Slap slap = slapRepository.findById(slapIds).get();
+                userToUpdate.addSlap(slap);
+            }
+        }
         userRepository.save(userToUpdate);
         return userToUpdate;
     }
 
-
-
     public void deleteUser(Long id) {
         User userToDelete = userRepository.findById(id).get();
         ArrayList<Long> slapIdsToDelete = new ArrayList<>();
+//        get all ids of userToDelete slaps, then use list of ids to delete from slap repo
         for (Slap slap : userToDelete.getSlaps()) {
             slapIdsToDelete.add(slap.getId());
         }
         for (Long slapId : slapIdsToDelete) {
             slapRepository.deleteById(slapId);
         }
-//        remove userToDelete follows
+//        unfollow all users that userToDelete currently follows
         for(int i = 0; i < userToDelete.getFollowing().size(); i++){
             userToDelete.unfollow(userToDelete.getFollowing().get(i));
         }
@@ -71,12 +92,4 @@ public class UserService {
         }
         userRepository.deleteById(id);
     }
-
-
-
-
-
-
-
-
 }

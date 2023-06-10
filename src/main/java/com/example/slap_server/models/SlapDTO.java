@@ -4,13 +4,13 @@ import java.time.LocalDateTime;
 
 public class SlapDTO {
 
-//   Properties
+    //   Properties
     private LocalDateTime dateTime;
     private String mood;
     private String message;
     private Long userId;
 
-// Constructor
+    // Constructor
     public SlapDTO (String mood, String message, Long userId){
         this.dateTime = LocalDateTime.now();
         this.mood = mood;
@@ -59,3 +59,5 @@ public class SlapDTO {
         this.userId = userId;
     }
 }
+
+
