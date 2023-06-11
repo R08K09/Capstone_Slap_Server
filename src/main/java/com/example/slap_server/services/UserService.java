@@ -31,14 +31,14 @@ public class UserService {
         return userRepository.findById(id).get();
     }
 
-    public List<Long> getUserFollowing(Long id){
+    public List<User> getUserFollowing(Long id){
         User user = userRepository.findById(id).get();
-        return user.getFollowingIds();
+        return user.getFollowing();
     }
 
-    public List<Long> getUserFollowers(Long id){
+    public List<User> getUserFollowers(Long id){
         User user = userRepository.findById(id).get();
-        return user.getFollowerIds();
+        return user.getFollowers();
     }
 
     public User createUser(UserDTO userDTO) {
@@ -81,20 +81,18 @@ public class UserService {
         return userToUpdate;
     }
 
-    public User updateUserAddFollowing(Long userId, List<Long> newFollowing){
+    public User updateUserAddFollowing(Long userId, Long followingId){
         User userToUpdate = userRepository.findById(userId).get();
-        for(Long followingId : newFollowing){
-            userToUpdate.addUserToFollow(userRepository.findById(followingId).get());
-        }
+        User following = userRepository.findById(followingId).get();
+        userToUpdate.addUserToFollow(following);
         userRepository.save(userToUpdate);
         return userToUpdate;
     }
 
-    public User updateUserUnfollowing(Long userId, List<Long> newUnfollowing){
+    public User updateUserUnfollowing(Long userId, Long unfollowingId){
         User userToUpdate = userRepository.findById(userId).get();
-        for(Long unfollowingId : newUnfollowing){
-            userToUpdate.unfollow(userRepository.findById(unfollowingId).get());
-        }
+        User unfollowing = userRepository.findById(unfollowingId).get();
+        userToUpdate.unfollow(unfollowing);
         userRepository.save(userToUpdate);
         return userToUpdate;
     }

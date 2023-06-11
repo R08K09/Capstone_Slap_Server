@@ -116,35 +116,6 @@ public class User {
     }
 
 
-    //    Other getters and setters:
-    public List<Long> getFollowerIds() {
-        List<Long> followerIds = new ArrayList<>();
-        for (User follower : followers) {
-            followerIds.add(follower.getId());
-        }
-        return followerIds;
-    }
-
-    public void setFollowerIds(List<Long> followerIds) {
-        // Convert followerIds to User objects if needed
-        // Set the followers property based on the User objects
-    }
-
-    public List<Long> getFollowingIds() {
-        List<Long> followingIds = new ArrayList<>();
-        for (User user : following) {
-            followingIds.add(user.getId());
-        }
-        return followingIds;
-    }
-
-    public void setFollowingIds(List<Long> followingIds) {
-        // Convert followingIds to User objects if needed
-        // Set the following property based on the User objects
-    }
-
-
-
     //    Methods
     public void addUserToFollow(User user){
         this.following.add(user);

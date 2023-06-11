@@ -29,12 +29,12 @@ public class UserController {
     }
 
     @GetMapping("/{id}/following")
-    public ResponseEntity<List<Long>> getUserFollowing(@PathVariable("id") Long id) {
+    public ResponseEntity<List<User>> getUserFollowing(@PathVariable("id") Long id) {
         return new ResponseEntity<>(userService.getUserFollowing(id), HttpStatus.OK);
     }
 
     @GetMapping("/{id}/followers")
-    public ResponseEntity<List<Long>> getUserFollowers(@PathVariable("id") Long id) {
+    public ResponseEntity<List<User>> getUserFollowers(@PathVariable("id") Long id) {
         return new ResponseEntity<>(userService.getUserFollowers(id), HttpStatus.OK);
     }
 
@@ -50,15 +50,15 @@ public class UserController {
         return new ResponseEntity<>(updatedUser, HttpStatus.OK);
     }
 
-    @PatchMapping("/{userId}/addFollowing")
-    public ResponseEntity<User> updateUserAddFollowing(@PathVariable Long userId, @RequestBody List<Long> newFollowing) {
-        User updatedUser = userService.updateUserAddFollowing(userId, newFollowing);
+    @PatchMapping("/{userId}/following/{followingId}")
+    public ResponseEntity<User> updateUserAddFollowing(@PathVariable Long userId, @PathVariable Long followingId) {
+        User updatedUser = userService.updateUserAddFollowing(userId, followingId);
         return new ResponseEntity<>(updatedUser, HttpStatus.OK);
     }
 
-    @PatchMapping("/{userId}/unfollowing")
-    public ResponseEntity<User> updateUserUnfollowing(@PathVariable Long userId, @RequestBody List<Long> newUnfollowing) {
-        User updatedUser = userService.updateUserUnfollowing(userId, newUnfollowing);
+    @PatchMapping("/{userId}/unfollowing/{unfollowingId}")
+    public ResponseEntity<User> updateUserUnfollowing(@PathVariable Long userId, @PathVariable Long unfollowingId) {
+        User updatedUser = userService.updateUserUnfollowing(userId, unfollowingId);
         return new ResponseEntity<>(updatedUser, HttpStatus.OK);
     }
 
