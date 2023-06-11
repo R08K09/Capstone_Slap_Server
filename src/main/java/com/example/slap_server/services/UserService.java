@@ -31,6 +31,15 @@ public class UserService {
         return userRepository.findById(id).get();
     }
 
+    public List<Long> getUserFollowing(Long id){
+        User user = userRepository.findById(id).get();
+        return user.getFollowingIds();
+    }
+
+    public List<Long> getUserFollowers(Long id){
+        User user = userRepository.findById(id).get();
+        return user.getFollowerIds();
+    }
 
     public User createUser(UserDTO userDTO) {
         User newUser = new User(userDTO.getUsername(), userDTO.getBio(), userDTO.getEmail());
@@ -67,6 +76,24 @@ public class UserService {
                 Slap slap = slapRepository.findById(slapIds).get();
                 userToUpdate.addSlap(slap);
             }
+        }
+        userRepository.save(userToUpdate);
+        return userToUpdate;
+    }
+
+    public User updateUserAddFollowing(Long userId, List<Long> newFollowing){
+        User userToUpdate = userRepository.findById(userId).get();
+        for(Long followingId : newFollowing){
+            userToUpdate.addUserToFollow(userRepository.findById(followingId).get());
+        }
+        userRepository.save(userToUpdate);
+        return userToUpdate;
+    }
+
+    public User updateUserUnfollowing(Long userId, List<Long> newUnfollowing){
+        User userToUpdate = userRepository.findById(userId).get();
+        for(Long unfollowingId : newUnfollowing){
+            userToUpdate.unfollow(userRepository.findById(unfollowingId).get());
         }
         userRepository.save(userToUpdate);
         return userToUpdate;
