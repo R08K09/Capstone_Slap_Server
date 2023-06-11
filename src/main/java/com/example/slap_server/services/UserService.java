@@ -96,4 +96,26 @@ public class UserService {
         }
         userRepository.deleteById(id);
     }
+
+    public UserDTO updateUserToFollow(Long userId, User user) {
+        User updatedUser = userRepository.save(user);
+        return convertToUserDTO(updatedUser);
+    }
+
+    public void updateUserToUnfollow(Long userId, User user) {
+        userRepository.save(user);
+    }
+
+    public List<User> getFollowers(Long userId) {
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new NoSuchElementException("User not found with ID: " + userId));
+        return user.getFollowers();
+    }
+
+    public List<User> getFollowing(Long userId) {
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new NoSuchElementException("User not found with ID: " + userId));
+        return user.getFollowing();
+    }
+
 }

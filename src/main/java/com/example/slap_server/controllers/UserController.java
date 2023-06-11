@@ -83,4 +83,75 @@ public class UserController {
         }
     }
 
+//    @PatchMapping(value = "/{userId}/follow")
+//    public ResponseEntity<List<User>> followUser(@PathVariable Long userId) {
+//        return new ResponseEntity<>(userService.followUser(userId, followingId), HttpStatus.OK);
+//    }
+
+    @PostMapping("/{followerId}/follow/{followingId}")
+    public ResponseEntity<String> followUser(@PathVariable("followerId") Long followerId, @PathVariable("followingId") Long followingId) {
+        try {
+            User follower = userService.getUserById(followerId);
+            User following = userService.getUserById(followingId);
+
+            if (follower.getFollowing().contains(following) && following.getFollowers().contains(follower)) {
+                return new ResponseEntity<>("User with ID " + followerId + " is already following user with ID " + followingId, HttpStatus.BAD_REQUEST);
+            }
+
+            follower.getFollowing().add(following);
+            following.getFollowers().add(follower);
+
+            userService.updateUserToFollow(followerId, follower);
+            userService.updateUserToFollow(followingId, following);
+
+            return new ResponseEntity<>("User with ID " + followerId + " is now following user with ID " + followingId, HttpStatus.OK);
+        } catch (NoSuchElementException e) {
+            return new ResponseEntity<>("User not found", HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @DeleteMapping("/{followerId}/unfollow/{followingId}")
+    public ResponseEntity<String> unfollowUser(@PathVariable("followerId") Long followerId, @PathVariable("followingId") Long followingId) {
+        try {
+            User follower = userService.getUserById(followerId);
+            User following = userService.getUserById(followingId);
+
+            if (!follower.getFollowing().contains(following) || !following.getFollowers().contains(follower)) {
+                return new ResponseEntity<>("User with ID " + followerId + " is not following user with ID " + followingId, HttpStatus.BAD_REQUEST);
+            }
+
+            follower.getFollowing().remove(following);
+            following.getFollowers().remove(follower);
+
+            userService.updateUserToUnfollow(followerId, follower);
+            userService.updateUserToUnfollow(followingId, following);
+
+            return new ResponseEntity<>("User with ID " + followerId + " has unfollowed user with ID " + followingId, HttpStatus.OK);
+        } catch (NoSuchElementException e) {
+            return new ResponseEntity<>("User not found", HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @GetMapping("/{userId}/followers")
+    public ResponseEntity<List<UserDTO>> getFollowers(@PathVariable("userId") Long userId) {
+        try {
+            List<User> followers = userService.getFollowers(userId);
+            List<UserDTO> followerDTOs = followers.stream().map(user -> userService.convertToUserDTO(user)).collect(Collectors.toList());
+            return new ResponseEntity<>(followerDTOs, HttpStatus.OK);
+        } catch (NoSuchElementException e) {
+            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @GetMapping("/{userId}/following")
+    public ResponseEntity<List<UserDTO>> getFollowing(@PathVariable("userId") Long userId) {
+        try {
+            List<User> following = userService.getFollowing(userId);
+            List<UserDTO> followingDTOs = following.stream().map(user -> userService.convertToUserDTO(user)).collect(Collectors.toList());
+            return new ResponseEntity<>(followingDTOs, HttpStatus.OK);
+        } catch (NoSuchElementException e) {
+            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+        }
+    }
+
 }
