@@ -33,16 +33,6 @@ public class SlapController {
         return new ResponseEntity<>(slapService.findSlapById(id), HttpStatus.OK);
     }
 
-//    @GetMapping(value = "/fromUser/{userId}")
-//    public ResponseEntity<List<SlapDTO>> getSlapByUser(@PathVariable Long userId) {
-//        try {
-//            List<SlapDTO> slapDTOs = slapService.findSlapsByUserId(userId);
-//            return new ResponseEntity<>(slapDTOs, HttpStatus.OK);
-//        } catch (NoSuchElementException e) {
-//            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
-//        }
-//    }
-
 
     // CREATE
     @PostMapping
