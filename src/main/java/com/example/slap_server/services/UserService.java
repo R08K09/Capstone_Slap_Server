@@ -1,5 +1,6 @@
 package com.example.slap_server.services;
 
+import com.example.slap_server.models.LoginDTO;
 import com.example.slap_server.models.Slap;
 import com.example.slap_server.models.User;
 import com.example.slap_server.models.UserDTO;
@@ -8,10 +9,7 @@ import com.example.slap_server.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.NoSuchElementException;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class UserService {
@@ -121,4 +119,23 @@ public class UserService {
         }
         userRepository.deleteById(id);
     }
+
+    public User checkLogin(LoginDTO loginDTO) {
+       User user = userRepository.findByEmailAndPassword(loginDTO.getEmail(), loginDTO.getPassword());
+       return user;
+    }
+
+
+    // find a user where name is x and password is y
+    //
+
+
+
+
+
+
+
+
 }
+
+

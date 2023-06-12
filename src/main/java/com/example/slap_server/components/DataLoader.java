@@ -29,7 +29,10 @@ public class DataLoader implements ApplicationRunner {
 //        Creating users
 
         User user1 = new User("natasha_xo", "If I was funny, I probably would have a better Slap bio.", "natasha@bnta.com");
+        user1.setPassword("password7");
         userRepository.save(user1);
+
+
         User user2 = new User("Zaynah99", "I’ll get over it, I just need to Slap about it first!", "zaynah@bnta.com");
         userRepository.save(user2);
         User user3 = new User("Radaaa", "Can't remember who I stole my bio from... or why", "rada@bnta.com");

@@ -1,4 +1,5 @@
 package com.example.slap_server.controllers;
+import com.example.slap_server.models.LoginDTO;
 import com.example.slap_server.models.User;
 import com.example.slap_server.models.UserDTO;
 import com.example.slap_server.services.UserService;
@@ -70,5 +71,14 @@ public class UserController {
         } catch (NoSuchElementException e) {
             return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
         }
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<User> loginUser(@RequestBody LoginDTO loginDTO) {
+        User user = userService.checkLogin(loginDTO);
+        if (user == null){
+            return new ResponseEntity<>(null, HttpStatus.FORBIDDEN);
+        }
+        return new ResponseEntity<>(user, HttpStatus.OK);
     }
 }

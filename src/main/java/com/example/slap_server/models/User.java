@@ -16,6 +16,9 @@ public class User {
     @Column(name = "username")
     private String username;
 
+    @Column(name = "password")
+    private String password;
+
     @Column(name = "bio")
     private String bio;
 
@@ -137,4 +140,11 @@ public class User {
         this.slaps.remove(slap);
     }
 
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
 }
