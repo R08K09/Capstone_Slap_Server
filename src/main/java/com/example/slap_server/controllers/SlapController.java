@@ -19,10 +19,7 @@ public class SlapController {
 
     // INDEX
     @GetMapping
-    public ResponseEntity<List<Slap>> getAllSlapsAndFilters(@RequestParam(required=false, name="userId") Long userId){
-        if (userId != null){
-            return new ResponseEntity<>(slapService.findSlapsByUserId(userId), HttpStatus.OK);
-        }
+    public ResponseEntity<List<Slap>> getAllSlaps(){
         return new ResponseEntity<>(slapService.findAllSlaps(), HttpStatus.OK);
     }
 
@@ -31,6 +28,11 @@ public class SlapController {
     @GetMapping("/{id}")
     public ResponseEntity<Slap> getSlapById(@PathVariable Long id) {
         return new ResponseEntity<>(slapService.findSlapById(id), HttpStatus.OK);
+    }
+
+    @GetMapping("/slapFromUser/{userId}")
+    public ResponseEntity<List<Slap>> getSlapsByUserId(@PathVariable Long userId){
+        return new ResponseEntity<>(slapService.findSlapsByUserId(userId), HttpStatus.OK);
     }
 
 
