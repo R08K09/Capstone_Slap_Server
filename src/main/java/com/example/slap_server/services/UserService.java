@@ -84,7 +84,9 @@ public class UserService {
     public User updateUserAddFollowing(Long userId, Long followingId){
         User userToUpdate = userRepository.findById(userId).get();
         User following = userRepository.findById(followingId).get();
-        userToUpdate.addUserToFollow(following);
+        if(!userToUpdate.getFollowing().contains(following)) {
+            userToUpdate.addUserToFollow(following);
+        }
         userRepository.save(userToUpdate);
         return userToUpdate;
     }
@@ -92,7 +94,9 @@ public class UserService {
     public User updateUserUnfollowing(Long userId, Long unfollowingId){
         User userToUpdate = userRepository.findById(userId).get();
         User unfollowing = userRepository.findById(unfollowingId).get();
-        userToUpdate.unfollow(unfollowing);
+        if(userToUpdate.getFollowing().contains(unfollowing)) {
+            userToUpdate.unfollow(unfollowing);
+        }
         userRepository.save(userToUpdate);
         return userToUpdate;
     }
