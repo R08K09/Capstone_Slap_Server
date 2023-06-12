@@ -28,17 +28,24 @@ public class DataLoader implements ApplicationRunner {
 
 //        Creating users
 
-        User user1 = new User("natasha_xo", "If I was funny, I probably would have a better Slap bio.", "natasha@bnta.com");
+        User user1 = new User("KimKardasshhh_xo", "If I was funny, I probably would have a better Slap bio.", "kimmyk@bnta.com");
         user1.setPassword("password7");
         userRepository.save(user1);
 
 
-        User user2 = new User("Zaynah99", "I’ll get over it, I just need to Slap about it first!", "zaynah@bnta.com");
+        User user2 = new User("Zayn_Malik", "I’ll get over it, I just need to Slap about it first!", "zayn@bnta.com");
         userRepository.save(user2);
-        User user3 = new User("Radaaa", "Can't remember who I stole my bio from... or why", "rada@bnta.com");
+        User user3 = new User("TheRealTate", "I don't have hair or brain cells", "tate@bnta.com");
         userRepository.save(user3);
         User user4 = new User("Anna", "Life is short. Make each second count. And enjoy iced lattes while you’re at it", "anna@bnta.com");
         userRepository.save(user4);
+        User user5 = new User("ZsoltTheCoder", "Oh boy!! That looks JANKY", "zsolt@bnta.com");
+        userRepository.save(user5);
+        User user6 = new User("Tori_Vega", "You don't have to be afraid to put your dreams in action", "tori@bnta.com");
+        userRepository.save(user6);
+        User user7 = new User("Cat.ValentineXOX", "Ahahahah", "cat@bnta.com");
+        userRepository.save(user7);
+
 
 //        Establishing relationships
 
