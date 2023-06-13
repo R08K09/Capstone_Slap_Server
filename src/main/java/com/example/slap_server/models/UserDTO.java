@@ -10,17 +10,19 @@ public class UserDTO {
     private String bio;
     private String email;
     private String password;
+    private String profilePicture;
     private List<Long> followingIds;
     private List<Long> followerIds;
     private List<Long> slapIds;
 
 
     // Constructor
-    public UserDTO(String username, String bio, String email, String password) {
+    public UserDTO(String username, String bio, String email, String password, String profilePicture) {
         this.username = username;
         this.bio = bio;
         this.email = email;
         this.password = password;
+        this.profilePicture = profilePicture;
 //        this.followerIds = followerIds;
 //        this.followingIds = followingIds;
 //        this.slapIds = slapIds;
@@ -88,5 +90,13 @@ public class UserDTO {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getProfilePicture() {
+        return profilePicture;
+    }
+
+    public void setProfilePicture(String profilePicture) {
+        this.profilePicture = profilePicture;
     }
 }

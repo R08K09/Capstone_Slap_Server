@@ -45,7 +45,7 @@ public class UserService {
     public User createUser(UserDTO userDTO) {
 
         // Create the new user
-        User newUser = new User(userDTO.getUsername(), userDTO.getBio(), userDTO.getEmail());
+        User newUser = new User(userDTO.getUsername(), userDTO.getBio(), userDTO.getEmail(), userDTO.getProfilePicture());
         newUser.setPassword(userDTO.getPassword());
         if(userDTO.getFollowingIds() != null){
             for(Long followingId : userDTO.getFollowingIds()){

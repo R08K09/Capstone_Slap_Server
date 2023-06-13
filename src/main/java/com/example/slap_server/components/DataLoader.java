@@ -28,22 +28,40 @@ public class DataLoader implements ApplicationRunner {
 
 //        Creating users
 
-        User user1 = new User("KimKardasshhh_xo", "If I was funny, I probably would have a better Slap bio.", "kimmyk@bnta.com");
-        user1.setPassword("password7");
+        User user1 = new User("KimKardashh_xo", "If I was funny, I probably would have a better Slap bio.", "kimmyk@bnta.com", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSgjsEkIK3ra4wHjmKXXOeGhGkNdtJXeQSagg&usqp=CAU");
+        user1.setPassword("kimmyk123");
         userRepository.save(user1);
+
         User user2 = new User("Zayn_Malik", "I’ll get over it, I just need to Slap about it first!", "zayn@bnta.com");
         userRepository.save(user2);
         User user3 = new User("NatashaTheGOAT", "I'm not scared of the capstone, the capstone is scared of me", "tasha@bnta.com");
+
+
+        User user3 = new User("Zayn_Malik", "I’ll get over it, I just need to Slap about it first!", "zayn@bnta.com", "https://d32ogoqmya1dw8.cloudfront.net/images/serc/empty_user_icon_256.v2.png");
+        user2.setPassword("zayn123");
+        userRepository.save(user2);
+
+        User user4 = new User("TheSirAttenborough", "I love nature.", "david@bnta.com", "https://populationmatters.org/wp-content/uploads/2022/08/Sir-David-A_1-768x625.jpg");
+        user3.setPassword("david123");
         userRepository.save(user3);
-        User user4 = new User("Anna", "Life is short. Make each second count. And enjoy iced lattes while you’re at it", "anna@bnta.com");
+
+        User user5 = new User("AnnaTheUnicorn", "Life is short. Make each second count. And enjoy iced lattes while you’re at it", "anna@bnta.com", "https://d32ogoqmya1dw8.cloudfront.net/images/serc/empty_user_icon_256.v2.png");
+        user4.setPassword("anna123");
         userRepository.save(user4);
-        User user5 = new User("ZsoltTheCoder", "Oh boy!! That looks JANKY", "zsolt@bnta.com");
+
+        User user6 = new User("ZsoltTheCoder", "Oh boy!! That looks JANKY", "zsolt@bnta.com", "https://d32ogoqmya1dw8.cloudfront.net/images/serc/empty_user_icon_256.v2.png");
+        user5.setPassword("zsolt123");
         userRepository.save(user5);
-        User user6 = new User("Tori_Vega", "You don't have to be afraid to put your dreams in action", "tori@bnta.com");
+
+        User user7 = new User("Tori_Vega", "You don't have to be afraid to put your dreams in action", "tori@bnta.com", "https://static.wikia.nocookie.net/characters/images/3/3a/Tori-tori-vega-17444528-1850-2560.jpg/revision/latest?cb=20150101075020");
+        user6.setPassword("tori123");
         userRepository.save(user6);
-        User user7 = new User("Cat.ValentineXOX", "Ahahahah", "cat@bnta.com");
+
+        User user8 = new User("Cat.ValentineXOX", "Ahahahah", "cat@bnta.com", "https://d32ogoqmya1dw8.cloudfront.net/images/serc/empty_user_icon_256.v2.png");
+        user7.setPassword("cat123");
         userRepository.save(user7);
-        User user8 = new User("MegaMindSujan", "I have the biggest brain in c9", "b.brainSujan@bnta.com");
+
+        User user9 = new User("MegaMindSujan", "I have the biggest brain in c9", "b.brainSujan@bnta.com");
         userRepository.save(user8);
 
 
