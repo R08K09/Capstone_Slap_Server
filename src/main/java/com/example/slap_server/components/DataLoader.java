@@ -33,7 +33,7 @@ public class DataLoader implements ApplicationRunner {
         userRepository.save(user1);
         User user2 = new User("Zayn_Malik", "I’ll get over it, I just need to Slap about it first!", "zayn@bnta.com");
         userRepository.save(user2);
-        User user3 = new User("TheRealTate", "I don't have hair or brain cells", "tate@bnta.com");
+        User user3 = new User("NatashaTheGOAT", "I'm not scared of the capstone, the capstone is scared of me", "tasha@bnta.com");
         userRepository.save(user3);
         User user4 = new User("Anna", "Life is short. Make each second count. And enjoy iced lattes while you’re at it", "anna@bnta.com");
         userRepository.save(user4);
@@ -43,6 +43,8 @@ public class DataLoader implements ApplicationRunner {
         userRepository.save(user6);
         User user7 = new User("Cat.ValentineXOX", "Ahahahah", "cat@bnta.com");
         userRepository.save(user7);
+        User user8 = new User("MegaMindSujan", "I have the biggest brain in c9", "b.brainSujan@bnta.com");
+        userRepository.save(user8);
 
 
 //        Establishing relationships
@@ -68,7 +70,7 @@ public class DataLoader implements ApplicationRunner {
         slapRepository.save(slap1);
 
 
-        Slap slap2 = new Slap(":wave:", "SMH! Hayfever is getting the best of me today");
+        Slap slap2 = new Slap(":wave:", "Hayfever szn went from 0-100 real quick");
         slap2.setUser(user2);
         user2.addSlap(slap2);
         slapRepository.save(slap2);
@@ -89,6 +91,58 @@ public class DataLoader implements ApplicationRunner {
         slap5.setUser(user1);
         user1.addSlap(slap5);
         slapRepository.save(slap5);
+
+        Slap slap6 = new Slap(":excited:", "I can't believe Jade and Beck broke up?!??");
+        slap6.setUser(user6);
+        user6.addSlap(slap6);
+        slapRepository.save(slap6);
+
+        Slap slap7 = new Slap(":crazy:", "ahahahha my brother has a stuffed teddy that he dips in ketchup :)");
+        slap7.setUser(user7);
+        user7.addSlap(slap7);
+        slapRepository.save(slap7);
+
+        Slap slap8 = new Slap(":tired:", "Cohort 9 is my favourite cohort EVER!! #longliveCapybara9");
+        slap8.setUser(user5);
+        user5.addSlap(slap8);
+        slapRepository.save(slap8);
+
+        Slap slap9 = new Slap(":bubbly:", "I love having blathers with my coding kids :) #CapybaraCodingKids");
+        slap9.setUser(user4);
+        user4.addSlap(slap9);
+        slapRepository.save(slap9);
+
+        Slap slap10 = new Slap(":excited", "It's my time to shine #FreakTheFreakOut");
+        slap10.setUser(user6);
+        user6.addSlap(slap10);
+        slapRepository.save(slap10);
+
+        Slap slap11 = new Slap(":confused:", "All the projects look janky?? #OhBoy");
+        slap11.setUser(user5);
+        user5.addSlap(slap11);
+        slapRepository.save(slap11);
+
+        Slap slap12 = new Slap(":confused:", "Some people need to grow up, how are you allergic to grass at your big age #DoBetter");
+        slap12.setUser(user8);
+        user8.addSlap(slap12);
+        slapRepository.save(slap12);
+
+        Slap slap13 = new Slap(":disappointed:", "Who named us the Keyboard Warriors?? SMH");
+        slap13.setUser(user3);
+        user3.addSlap(slap13);
+        slapRepository.save(slap13);
+
+        Slap slap14 = new Slap(":covering eyes:", "I woke up and my eyes were glued together, can eyes make glue??");
+        slap14.setUser(user7);
+        user7.addSlap(slap14);
+        slapRepository.save(slap14);
+
+        Slap slap15 = new Slap(":bored:", "Stop asking me questions ab 1D, it's never happening again.");
+        slap15.setUser(user2);
+        user2.addSlap(slap15);
+        slapRepository.save(slap15);
+
+
 
 
 
