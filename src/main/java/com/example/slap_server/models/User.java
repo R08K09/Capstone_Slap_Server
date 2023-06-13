@@ -25,6 +25,9 @@ public class User {
     @Column(name = "email")
     private String email;
 
+    @Column(name = "profilePicture")
+    private String profilePicture;
+
     @JsonIgnoreProperties({"followers", "following"})
     @ManyToMany
     @JoinTable(
@@ -45,13 +48,14 @@ public class User {
 
 
     // Constructor
-    public User(String username, String bio, String email){
+    public User(String username, String bio, String email, String profilePicture){
         this.username = username;
         this.bio = bio;
         this.email = email;
         this.following = new ArrayList<>();
         this.followers = new ArrayList<>();
         this.slaps = new ArrayList<>();
+        this.profilePicture = profilePicture;
     }
 
 
@@ -146,5 +150,13 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getProfilePicture() {
+        return profilePicture;
+    }
+
+    public void setProfilePicture(String profilePicture) {
+        this.profilePicture = profilePicture;
     }
 }
