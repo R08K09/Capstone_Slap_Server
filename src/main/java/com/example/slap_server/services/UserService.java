@@ -27,8 +27,9 @@ public class UserService {
         return userRepository.findAll();
     }
 
-    public User getUserById(Long id){
-        return userRepository.findById(id).get();
+    public User getUserById(Long id) {
+        Optional<User> user = userRepository.findById(id);
+        return user.orElse(null);
     }
 
     public List<User> getUserFollowing(Long id){
