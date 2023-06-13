@@ -7,7 +7,9 @@ import com.example.slap_server.models.UserDTO;
 import com.example.slap_server.repositories.SlapRepository;
 import com.example.slap_server.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.*;
 
@@ -40,7 +42,10 @@ public class UserService {
     }
 
     public User createUser(UserDTO userDTO) {
+
+        // Create the new user
         User newUser = new User(userDTO.getUsername(), userDTO.getBio(), userDTO.getEmail());
+        newUser.setPassword(userDTO.getPassword());
         if(userDTO.getFollowingIds() != null){
             for(Long followingId : userDTO.getFollowingIds()){
                 User user = userRepository.findById(followingId).get();
@@ -128,13 +133,6 @@ public class UserService {
 
     // find a user where name is x and password is y
     //
-
-
-
-
-
-
-
 
 }
 
