@@ -44,7 +44,7 @@ public class UserService {
 
     public User createUser(UserDTO userDTO) {
         // Create the new user
-        User newUser = new User(userDTO.getUsername(), userDTO.getBio(), userDTO.getEmail(), userDTO.getProfilePicture());
+        User newUser = new User(userDTO.getUsername(), userDTO.getBio(), userDTO.getEmail(), "https://i.imgur.com/ukufO5H.png");
         newUser.setPassword(userDTO.getPassword());
         if (userDTO.getFollowingIds() != null) {
             for (Long followingId : userDTO.getFollowingIds()) {
