@@ -44,11 +44,18 @@ public class UserController {
         return new ResponseEntity<>(userService.getUserFollowers(id), HttpStatus.OK);
     }
 
+//    @PostMapping
+//    public ResponseEntity<List<User>> createUser(@RequestBody UserDTO userDTO) {
+//        userService.createUser(userDTO);
+//        return new ResponseEntity<>(userService.getAllUsers(), HttpStatus.OK);
+//    }
+
     @PostMapping
-    public ResponseEntity<List<User>> createUser(@RequestBody UserDTO userDTO) {
-        userService.createUser(userDTO);
-        return new ResponseEntity<>(userService.getAllUsers(), HttpStatus.OK);
+    public ResponseEntity<User> createAuthenticatedUser(@RequestBody UserDTO userDTO) {
+        User newUser = userService.createUser(userDTO);
+        return ResponseEntity.status(HttpStatus.CREATED).body(newUser);
     }
+
 
     @PatchMapping("/{id}")
     public ResponseEntity<User> updateUser(@PathVariable("id") Long id, @RequestBody UserDTO userDTO) {

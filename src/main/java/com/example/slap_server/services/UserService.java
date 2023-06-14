@@ -43,25 +43,26 @@ public class UserService {
     }
 
     public User createUser(UserDTO userDTO) {
-
         // Create the new user
         User newUser = new User(userDTO.getUsername(), userDTO.getBio(), userDTO.getEmail(), userDTO.getProfilePicture());
         newUser.setPassword(userDTO.getPassword());
-        if(userDTO.getFollowingIds() != null){
-            for(Long followingId : userDTO.getFollowingIds()){
+        if (userDTO.getFollowingIds() != null) {
+            for (Long followingId : userDTO.getFollowingIds()) {
                 User user = userRepository.findById(followingId).get();
                 newUser.addUserToFollow(user);
             }
         }
-        if(userDTO.getSlapIds() != null){
-            for(Long slapId : userDTO.getSlapIds()){
+        if (userDTO.getSlapIds() != null) {
+            for (Long slapId : userDTO.getSlapIds()) {
                 Slap slap = slapRepository.findById(slapId).get();
                 newUser.addSlap(slap);
             }
         }
 
-        return userRepository.save(newUser);
+        User savedUser = userRepository.save(newUser);
+        return savedUser;
     }
+
 
     public User updateUser(UserDTO userDTO, Long userId) {
         User userToUpdate = userRepository.findById(userId).orElseThrow(() -> new NoSuchElementException("User not found"));
