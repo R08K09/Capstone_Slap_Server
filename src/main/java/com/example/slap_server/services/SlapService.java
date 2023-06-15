@@ -19,11 +19,9 @@ public class SlapService {
     @Autowired
     SlapRepository slapRepository;
 
-//    @Autowired
-//    UserRepository userRepository;
-
     @Autowired
     UserService userService;
+
 
     public List<Slap> findAllSlaps() {
         return slapRepository.findAll();
@@ -34,14 +32,7 @@ public class SlapService {
     }
 
     public List<Slap> findSlapsByUserId(Long userId) {
-        List<Slap> allSlaps = slapRepository.findAll();
-        List<Slap> filteredSlaps = new ArrayList<>();
-        for (Slap slaps : allSlaps){
-            if (slaps.getUser().getId() == userId){
-                filteredSlaps.add(slaps);
-            }
-        }
-        return filteredSlaps;
+        return slapRepository.findSlapsByUserId(userId);
     }
 
     public void createSlap(SlapDTO slapDTO) {
@@ -70,6 +61,7 @@ public class SlapService {
     public void deleteSlap(Long slapId) {
         slapRepository.deleteById(slapId);
     }
+
 }
 
 
