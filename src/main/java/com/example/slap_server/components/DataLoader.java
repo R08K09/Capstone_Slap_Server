@@ -26,8 +26,7 @@ public class DataLoader implements ApplicationRunner {
     @Override
     public void run(ApplicationArguments args) throws Exception {
 
-//        Creating users
-
+        // Creating users
         User user1 = new User("KimKardashh_xo", "If I was funny, I probably would have a better Slap bio.", "kimmyk@bnta.com", "https://i.imgur.com/mRiJb2O.jpg");
         user1.setPassword("kimmyk123");
         userRepository.save(user1);
@@ -65,8 +64,7 @@ public class DataLoader implements ApplicationRunner {
         userRepository.save(user9);
 
 
-//        Establishing relationships
-
+        // Establishing relationships
         user1.addUserToFollow(user3);
         user1.addUserToFollow(user4);
 
@@ -80,25 +78,21 @@ public class DataLoader implements ApplicationRunner {
         user4.addUserToFollow(user1);
 
 
-//        Creating slaps
-
+        // Creating slaps
         Slap slap1 = new Slap(":wave:", "anyone on my Slap feed watching Love Island right now? ");
         slap1.setUser(user1);
         user1.addSlap(slap1);
         slapRepository.save(slap1);
-
 
         Slap slap2 = new Slap(":wave:", "Hayfever szn went from 0-100 real quick");
         slap2.setUser(user3);
         user3.addSlap(slap2);
         slapRepository.save(slap2);
 
-
         Slap slap3 = new Slap("U+1F600", "Wait.. Charlotte Tilbury are doing 25% all makeup today? Only just found out lol");
         slap3.setUser(user2);
         user2.addSlap(slap3);
         slapRepository.save(slap3);
-
 
         Slap slap4 = new Slap("U+1F600", "watching endangered animals repopulate is an amazing thing");
         slap4.setUser(user4);
@@ -161,14 +155,16 @@ public class DataLoader implements ApplicationRunner {
         slapRepository.save(slap15);
 
 
-
-
-
-
+        // Saving Users
         userRepository.save(user1);
         userRepository.save(user2);
         userRepository.save(user3);
         userRepository.save(user4);
+        userRepository.save(user5);
+        userRepository.save(user6);
+        userRepository.save(user7);
+        userRepository.save(user8);
+        userRepository.save(user9);
 
     }
 

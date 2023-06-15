@@ -58,11 +58,8 @@ public class UserService {
                 newUser.addSlap(slap);
             }
         }
-
-        User savedUser = userRepository.save(newUser);
-        return savedUser;
+        return userRepository.save(newUser);
     }
-
 
     public User updateUser(UserDTO userDTO, Long userId) {
         User userToUpdate = userRepository.findById(userId).orElseThrow(() -> new NoSuchElementException("User not found"));
@@ -131,10 +128,6 @@ public class UserService {
        User user = userRepository.findByEmailAndPassword(loginDTO.getEmail(), loginDTO.getPassword());
        return user;
     }
-
-
-    // find a user where name is x and password is y
-    //
 
 }
 

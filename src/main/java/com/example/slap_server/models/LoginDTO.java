@@ -2,21 +2,26 @@ package com.example.slap_server.models;
 
 public class LoginDTO {
 
+    // Properties
     private String email;
 
     private String password;
 
+
+    // Constructor
     public LoginDTO(String email, String password){
         this.email = email;
         this.password = password;
     }
 
+
+    // Default Constructor
     public LoginDTO(){
 
     }
 
-    // Getters and Setters
 
+    // Getters and Setters
     public String getEmail() {
         return email;
     }

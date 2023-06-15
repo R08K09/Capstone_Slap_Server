@@ -123,7 +123,7 @@ public class User {
     }
 
 
-    //    Methods
+    // Methods
     public void addUserToFollow(User user){
         this.following.add(user);
     }

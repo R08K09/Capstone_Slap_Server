@@ -19,11 +19,15 @@ public class UserController {
     @Autowired
     UserService userService;
 
+
+    // INDEX
     @GetMapping
     public ResponseEntity<List<User>> getAllUsers() {
         return new ResponseEntity<>(userService.getAllUsers(), HttpStatus.OK);
     }
 
+
+    // SHOW
     @GetMapping("/{id}")
     public ResponseEntity<User> getUserById(@PathVariable("id") Long id) {
         User user = userService.getUserById(id);
@@ -44,19 +48,25 @@ public class UserController {
         return new ResponseEntity<>(userService.getUserFollowers(id), HttpStatus.OK);
     }
 
-//    @PostMapping
-//    public ResponseEntity<List<User>> createUser(@RequestBody UserDTO userDTO) {
-//        userService.createUser(userDTO);
-//        return new ResponseEntity<>(userService.getAllUsers(), HttpStatus.OK);
-//    }
 
+    // CREATE
     @PostMapping
     public ResponseEntity<User> createAuthenticatedUser(@RequestBody UserDTO userDTO) {
         User newUser = userService.createUser(userDTO);
         return ResponseEntity.status(HttpStatus.CREATED).body(newUser);
     }
 
+    @PostMapping("/login")
+    public ResponseEntity<User> loginUser(@RequestBody LoginDTO loginDTO) {
+        User user = userService.checkLogin(loginDTO);
+        if (user == null){
+            return new ResponseEntity<>(null, HttpStatus.FORBIDDEN);
+        }
+        return new ResponseEntity<>(user, HttpStatus.OK);
+    }
 
+
+    // UPDATE
     @PatchMapping("/{id}")
     public ResponseEntity<User> updateUser(@PathVariable("id") Long id, @RequestBody UserDTO userDTO) {
         User updatedUser = userService.updateUser(userDTO, id);
@@ -75,6 +85,8 @@ public class UserController {
         return new ResponseEntity<>(updatedUser, HttpStatus.OK);
     }
 
+
+    // DELETE
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteUser(@PathVariable("id") Long id) {
         try {
@@ -85,12 +97,4 @@ public class UserController {
         }
     }
 
-    @PostMapping("/login")
-    public ResponseEntity<User> loginUser(@RequestBody LoginDTO loginDTO) {
-        User user = userService.checkLogin(loginDTO);
-        if (user == null){
-            return new ResponseEntity<>(null, HttpStatus.FORBIDDEN);
-        }
-        return new ResponseEntity<>(user, HttpStatus.OK);
-    }
 }

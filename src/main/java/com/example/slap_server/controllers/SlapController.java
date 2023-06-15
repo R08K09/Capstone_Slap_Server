@@ -58,4 +58,5 @@ public class SlapController {
         slapService.deleteSlap(id);
         return new ResponseEntity<>(id, HttpStatus.OK);
     }
+
 }
