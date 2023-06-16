@@ -31,7 +31,7 @@ public class DataLoader implements ApplicationRunner {
         user1.setPassword("kimmyk123");
         userRepository.save(user1);
 
-        User user2 = new User("NatashaTheGOAT", "I'm not scared of the capstone, the capstone is scared of me", "tasha@bnta.com", "https://i.imgur.com/ukufO5H.png");
+        User user2 = new User("NatashaTheGOAT", "I'm not scared of the capstone, the capstone is scared of me", "tasha@bnta.com", "https://i.imgur.com/tpLKB4n.png");
         user2.setPassword("tasha123");
         userRepository.save(user2);
 
