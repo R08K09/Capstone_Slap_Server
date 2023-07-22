@@ -57,10 +57,10 @@ To ensure the endpoints are working as expected, you can test them using Postman
 
 ### **_7. Collaborators_**
 
-* Nastasia Usoh (GitHub: nasthasiausoh)
-* Rada Kanchananupradit (GitHub: R08K09)
-* Subrina Faisal (GitHub: Subrina7)
-* Zaynah Sadiq (GitHub: Zaynah99)
+* [Nastasia Usoh] (GitHub: nasthasiausoh)
+* [Rada Kanchananupradit] (GitHub: R08K09)
+* [Subrina Faisal] (GitHub: Subrina7)
+* [Zaynah Sadiq] (GitHub: Zaynah99)
 
 
 
