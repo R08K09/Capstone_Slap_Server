@@ -9,19 +9,19 @@
 > 4. Set-Up Instructions
 > 5. RESTful Route Endpoints
 > 6. Future Developments
-> 6. Collaborators
+> 7. Collaborators
 
 
 ### **_1. Project Overview_**
 As part of our capstone project, our team created an API and the UI for the app in 10 days. Our group decided to build on the nostalgic social media platform 'TheSlap.com' as seen on the show Victorious. The Slap is a modern social media platform reminiscent of MySpace, designed with the user in mind to share their thoughts and feelings with the world.
 
-### **_1. Diagrams_**
+### **_2. Diagrams_**
 
 #### UML diagram
 
 #### ERD diagram
 
-### **_1. Tech Stack**
+### **_3. Tech Stack_**
 
 Tech stack for the back-end:
 
@@ -32,7 +32,7 @@ Tech stack for the back-end:
 
 Dependencies: `Lombok`, `Spring Data JPA`, `Spring Web`, `Spring Boot DevTools`, `PostgreSQL Driver`
 
-## Set-Up Instructions:
+### **_4. Set-Up Instructions_**
 
 Ensure the following is installed on your device:
 
@@ -47,9 +47,20 @@ Ensure the following is installed on your device:
 
 3. Via Intellij IDEA, run the `Capstone_Slap_Server` and make sure the API is running on port 8080.
 
+4. The client-side of the project can be found here: https://github.com/nasthasiausoh/Capstone_Slap_Client
+
 To ensure the endpoints are working as expected, you can test them using Postman. All endpoints are available below in section 5 'RESTful Route Endpoints'.
 
+### **_5. RESTful Route Endpoints_**
 
+### **_6. Future Devlopments_**
+
+### **_7. Collaborators_**
+
+* Nastasia Usoh (GitHub: nasthasiausoh)
+* Rada Kanchananupradit (GitHub: R08K09)
+* Subrina Faisal (GitHub: Subrina7)
+* Zaynah Sadiq (GitHub: Zaynah99)
 
 
 
