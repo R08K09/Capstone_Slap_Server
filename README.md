@@ -55,9 +55,13 @@ To ensure the endpoints are working as expected, you can test them using Postman
 
 ### **_6. Future Devlopments_**
 
+1. Enable users to upload images and videos as slaps
+2. Allow users to reply to slaps
+3. Utilise a database (such as AWS) to store songs, videos and pictures
+
 ### **_7. Collaborators_**
 
-- GitHub: [Nasthasia Usoh](https://github.com/nasthasiausoh)
+* GitHub: [Nasthasia Usoh](https://github.com/nasthasiausoh)
 * GitHub: [Rada Kanchananupradit](https://github.com/R08K09)
 * GitHub: [Subrina Faisal](https://github.com/Subrina7)
 * GitHub: [Zaynah Sadiq](https://github.com/Zaynah99)
