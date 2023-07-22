@@ -60,7 +60,7 @@ To ensure the endpoints are working as expected, you can test them using Postman
 * [Nastasia Usoh] (GitHub: nasthasiausoh)
 * [Rada Kanchananupradit] (GitHub: R08K09)
 * [Subrina Faisal] (https://github.com/Subrina7)
-* [Zaynah Sadiq] (GitHub: Zaynah99)
+* - GitHub: [Zaynah Sadiq](https://github.com/Zaynah99)
 
 
 
