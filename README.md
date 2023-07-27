@@ -19,7 +19,10 @@ As part of our capstone project, our team created an API and the UI for the app 
 
 #### UML diagram
 
+![UML Diagram](UML_Diagram.png)
+
 #### ERD diagram
+![ERD diagram](ERD_Diagram.png)
 
 ### **_3. Tech Stack_**
 
@@ -60,23 +63,23 @@ To ensure the endpoints are working as expected, you can test them using Postman
 | `getAllUsers`            | GET    | null                             | `/users`                    |
 | `getUserById`            | GET    | null                             | `/users/{id}`               |
 | `getUserFollowing`       | GET    | null                             | `/users/{id}/followers `   |
-| `getUserFollowers`       | GET    | null                             | `/users/{userId} `          |
+| `getUserFollowers`       | GET    | null                             | `/users/{userId}`          |
 | `createAuthenticatedUser`| POST   | `UserDTO` (username, bio & email)| `/users`                    |
-| `loginUser`              | POST   | `LoginDTO` (email & password)    |` /users/login`               |  
-| `updateUser`             | PATCH  | `UserDTO` (username, bio & email)|` /users/{id} `               |    
-| `updateUserAddFollowing` | PATCH  | null                             |` /users/{userId}/following/{followingId}` |
-| `updateUserUnfollowing`  | PATCH  | null                             |` /users/{userId}/unfollowing/{unfollowingId}  `|  
-| `deleteUser`             | DELETE | null                             |` /users/{id}  `             |  
+| `loginUser`              | POST   | `LoginDTO` (email & password)    | `/users/login`               |  
+| `updateUser`             | PATCH  | `UserDTO` (username, bio & email)| `/users/{id}`               |    
+| `updateUserAddFollowing` | PATCH  | null                             | `/users/{userId}/following/{followingId}` |
+| `updateUserUnfollowing`  | PATCH  | null                             | `/users/{userId}/unfollowing/{unfollowingId}`|  
+| `deleteUser`             | DELETE | null                             | `/users/{id}`             |  
 
 
 ### Slap Controller
 | Route Name             | Request Type | RequestBody                      | Request Path                                    |
 |------------------------|--------------|----------------------------------|-------------------------------------------------|
-| `getAllSlaps`            | GET          | null                             | `/slaps `                                    |
+| `getAllSlaps`            | GET          | null                             | `/slaps`                                    |
 | `getSlapById`            | GET          | null                             | `/slaps/{id}`                                |
 | `getSlapsByUserId`       | GET          | null                             | `/slaps/slapFromUser/{userId}`               |
-| `createSlap`             | POST         | `SlaproomDTO ` (dateTime, mood, message & userId) | `/slaps `                   |
-| `updateSlap`             | POST         | `SlapDTO ` (dateTime, mood, message & userId)      | `/slaps/{id}`              |
+| `createSlap`             | POST         | `SlaproomDTO` (dateTime, mood, message & userId) | `/slaps`                   |
+| `updateSlap`             | POST         | `SlapDTO` (dateTime, mood, message & userId)      | `/slaps/{id}`              |
 | `deleteSlap`             | DELETE       | null                             | `/slaps/{id}`                      
 
 ### **_6. Future Devlopments_**
