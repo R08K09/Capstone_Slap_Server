@@ -59,14 +59,27 @@ To ensure the endpoints are working as expected, you can test them using Postman
 |------------------------|--------|----------------------------------|---------------------------|
 | `getAllUsers`            | GET    | null                             | `/users`                    |
 | `getUserById`            | GET    | null                             | `/users/{id}`               |
-| `getUserFollowing`       | GET    | null                             | `users/{id}/followers `   |
+| `getUserFollowing`       | GET    | null                             | `/users/{id}/followers `   |
 | `getUserFollowers`       | GET    | null                             | `/users/{userId} `          |
 | `createAuthenticatedUser`| POST   | `UserDTO` (username, bio & email)| `/users`                    |
-| `loginUser`              | POST   | `LoginDTO` (email & password)    |` users/login`               |  
-| `updateUser`             | PATCH  | `UserDTO` (username, bio & email)|` users/{id} `               |    
-| `updateUserAddFollowing` | PATCH  | null                             |` users/{userId}/following/{followingId}` |
+| `loginUser`              | POST   | `LoginDTO` (email & password)    |` /users/login`               |  
+| `updateUser`             | PATCH  | `UserDTO` (username, bio & email)|` /users/{id} `               |    
+| `updateUserAddFollowing` | PATCH  | null                             |` /users/{userId}/following/{followingId}` |
 | `updateUserUnfollowing`  | PATCH  | null                             |` /users/{userId}/unfollowing/{unfollowingId}  `|  
 | `deleteUser`             | DELETE | null                             |` /users/{id}  `             |  
+
+#### Slap Controller
+
+
+### Chatroom Controller
+| Route Name             | Request Type | RequestBody                      | Request Path                                    |
+|------------------------|--------------|----------------------------------|-------------------------------------------------|
+| `getAllSlaps`            | GET          | null                             | `/slaps `                                    |
+| `getSlapById`            | GET          | null                             | `/slaps/{id}`                                |
+| `getSlapsByUserId`       | GET          | null                             | `/slaps/slapFromUser/{userId}`               |
+| `createSlap`             | POST         | `SlatroomDTO ` (dateTime, mood, message & userId) | `/slaps `                   |
+| `updateSlap`             | POST         | `SlapDTO ` (dateTime, mood, message & userId)      | `/slaps/{id}`              |
+| `deleteSlap`             | DELETE       | null                             | ` /slaps/{id}`                      
 
 ### **_6. Future Devlopments_**
 
