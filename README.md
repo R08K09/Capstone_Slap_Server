@@ -53,7 +53,7 @@ To ensure the endpoints are working as expected, you can test them using Postman
 
 ### **_5. RESTful Route Endpoints_**
 
-#### User Controller
+### User Controller
 
 | Route Name             | Request Type | RequestBody                      | Request Path              |
 |------------------------|--------|----------------------------------|---------------------------|
@@ -68,10 +68,8 @@ To ensure the endpoints are working as expected, you can test them using Postman
 | `updateUserUnfollowing`  | PATCH  | null                             |` /users/{userId}/unfollowing/{unfollowingId}  `|  
 | `deleteUser`             | DELETE | null                             |` /users/{id}  `             |  
 
-#### Slap Controller
 
-
-### Chatroom Controller
+### Slap Controller
 | Route Name             | Request Type | RequestBody                      | Request Path                                    |
 |------------------------|--------------|----------------------------------|-------------------------------------------------|
 | `getAllSlaps`            | GET          | null                             | `/slaps `                                    |
