@@ -47,7 +47,7 @@ Ensure the following is installed on your device:
 
 3. Via Intellij IDEA, run the `Capstone_Slap_Server` and make sure the API is running on port 8080.
 
-4. The client-side of the project can be found here: [Front-end](https://github.com/nasthasiausoh/Capstone_Slap_Client)
+4. The client-side of the project can be found [here](https://github.com/nasthasiausoh/Capstone_Slap_Client)
 
 To ensure the endpoints are working as expected, you can test them using Postman. All endpoints are available below in section 5 'RESTful Route Endpoints'.
 
@@ -79,7 +79,7 @@ To ensure the endpoints are working as expected, you can test them using Postman
 | `getSlapsByUserId`       | GET          | null                             | `/slaps/slapFromUser/{userId}`               |
 | `createSlap`             | POST         | `SlatroomDTO ` (dateTime, mood, message & userId) | `/slaps `                   |
 | `updateSlap`             | POST         | `SlapDTO ` (dateTime, mood, message & userId)      | `/slaps/{id}`              |
-| `deleteSlap`             | DELETE       | null                             | ` /slaps/{id}`                      
+| `deleteSlap`             | DELETE       | null                             | `/slaps/{id}`                      
 
 ### **_6. Future Devlopments_**
 
