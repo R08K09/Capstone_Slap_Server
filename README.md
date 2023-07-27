@@ -75,7 +75,7 @@ To ensure the endpoints are working as expected, you can test them using Postman
 | `getAllSlaps`            | GET          | null                             | `/slaps `                                    |
 | `getSlapById`            | GET          | null                             | `/slaps/{id}`                                |
 | `getSlapsByUserId`       | GET          | null                             | `/slaps/slapFromUser/{userId}`               |
-| `createSlap`             | POST         | `SlatroomDTO ` (dateTime, mood, message & userId) | `/slaps `                   |
+| `createSlap`             | POST         | `SlaproomDTO ` (dateTime, mood, message & userId) | `/slaps `                   |
 | `updateSlap`             | POST         | `SlapDTO ` (dateTime, mood, message & userId)      | `/slaps/{id}`              |
 | `deleteSlap`             | DELETE       | null                             | `/slaps/{id}`                      
 
