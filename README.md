@@ -53,6 +53,21 @@ To ensure the endpoints are working as expected, you can test them using Postman
 
 ### **_5. RESTful Route Endpoints_**
 
+#### User Controller
+
+| Route Name             | Request Type | RequestBody                      | Request Path              |
+|------------------------|--------|----------------------------------|---------------------------|
+| `getAllUsers`            | GET    | null                             | `/users`                    |
+| `getUserById`            | GET    | null                             | `/users/{id}`               |
+| `getUserFollowing`       | GET    | null                             | `users/{id}/followers `   |
+| `getUserFollowers`       | GET    | null                             | `/users/{userId} `          |
+| `createAuthenticatedUser`| POST   | `UserDTO` (username, bio & email)| `/users`                    |
+| `loginUser`              | POST   | `LoginDTO` (email & password)    |` users/login`               |  
+| `updateUser`             | PATCH  | `UserDTO` (username, bio & email)|` users/{id} `               |    
+| `updateUserAddFollowing` | PATCH  | null                             |` users/{userId}/following/{followingId}` |
+| `updateUserUnfollowing`  | PATCH  | null                             |` /users/{userId}/unfollowing/{unfollowingId}  `|  
+| `deleteUser`             | DELETE | null                             |` /users/{id}  `             |  
+
 ### **_6. Future Devlopments_**
 
 1. Enable users to upload images and videos as slaps
