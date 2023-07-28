@@ -19,10 +19,10 @@ As part of our capstone project, our team created an API and the UI for the app 
 
 #### UML diagram
 
-![UML Diagram](UML_Diagram.png)
+![UML Diagram](Diagrams/UML_Diagram.png)
 
 #### ERD diagram
-![ERD diagram](ERD_Diagram.png)
+![ERD diagram](Diagrams/ERD_Diagram.png)
 
 ### **_3. Tech Stack_**
 
